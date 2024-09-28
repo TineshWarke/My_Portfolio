@@ -39,7 +39,7 @@ const Projects = () => {
         {
           projects.map(project => (
             <motion.div className='col-span-1 p-2' key={project.name} variants={fadeInUP}>
-              <ProjectCard project={project} />
+              <ProjectCard project={project} key={project.name}/>
             </motion.div>
           ))
         }
