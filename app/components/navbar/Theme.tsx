@@ -7,16 +7,6 @@ const Theme = () => {
 
     return (
         <ul className="bg-base-100 dark:bg-black/50 dark:text-white p-2 rounded-box z-[1] w-35 shadow-2xl">
-            <li><input
-                type="radio"
-                name="theme-dropdown"
-                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
-                aria-label="Luxury"
-                value="luxury"
-                // onChange={() => setTheme('dark')}
-                onChange={() => setTheme('light')}
-            />
-            </li>
             <li>
                 <input
                     type="radio"
@@ -26,6 +16,16 @@ const Theme = () => {
                     value="synthwave"
                     onChange={() => setTheme('light')}
                 />
+            </li>
+            <li><input
+                type="radio"
+                name="theme-dropdown"
+                className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
+                aria-label="Luxury"
+                value="luxury"
+                // onChange={() => setTheme('dark')}
+                onChange={() => setTheme('light')}
+            />
             </li>
             <li>
                 <input

@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-theme="luxury" className='scrollbar-none scroll-smooth'>
+    <html lang="en" data-theme="synthwave" className='scrollbar-none scroll-smooth'>
       <body className={inter.className}>{children}</body>
     </html>
   )
