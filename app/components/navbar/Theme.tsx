@@ -3,7 +3,7 @@ import { useTheme } from "next-themes";
 
 const Theme = () => {
     const { theme, setTheme } = useTheme()
-    // useEffect(() => setTheme('dark'), [])
+    useEffect(() => setTheme('light'), [])
 
     return (
         <ul className="bg-base-100 dark:bg-black/50 dark:text-white p-2 rounded-box z-[1] w-35 shadow-2xl">
