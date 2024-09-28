@@ -6,6 +6,7 @@ import Header from './components/header/Header'
 import Services from './components/services/Services'
 import Resume from './components/resume/Resume'
 import { ThemeProvider } from "next-themes";
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <Resume />
         <Projects />
         <MySkills />
+        <SpeedInsights/>
       </main>
     </ThemeProvider>
   )
