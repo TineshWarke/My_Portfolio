@@ -185,8 +185,8 @@ export const projects: IProject[] = [
             '3. Features smooth animations and interactive elements.',
         ],
         image_path: '/images/portfolio.png',
-        deployed_url: 'https://daisyui.com/docs/themes/',
-        github_url: 'https://tailwindcss.com/',
+        deployed_url: 'https://tineshwarke-portfolio.vercel.app/',
+        github_url: 'https://github.com/TineshWarke/My_Portfolio.git',
         category: ['React'],
         key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
     },
