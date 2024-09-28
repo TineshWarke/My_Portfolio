@@ -14,7 +14,7 @@ const SkillSet: React.FC<{ skills: ISkills[] }> = ({ skills }) => {
   const moveDistance = 50;
 
   const getRandomPosition = () => {
-    const maxX = 1000 - radius * 2 - padding - bottomPadding;
+    const maxX = 1200 - radius * 2 - padding - bottomPadding;
     const maxY = 550 - radius * 2 - padding - bottomPadding;
     const x = Math.random() * maxX + padding;
     const y = Math.random() * maxY + padding;
@@ -42,6 +42,20 @@ const SkillSet: React.FC<{ skills: ISkills[] }> = ({ skills }) => {
     setPositions(newPositions);
   };
 
+  // const generateRandomPositions = () => {
+  //   const newPositions: { left: number; top: number }[] = [];
+  //   let attempts = 0; // Track the number of attempts
+  //   while (newPositions.length < skills.length && attempts < 1000) { // Limit to 1000 attempts
+  //     const newPos = getRandomPosition();
+
+  //     if (!checkCollision(newPos, newPositions)) {
+  //       newPositions.push(newPos);
+  //     }
+  //     attempts++;
+  //   }
+  //   setPositions(newPositions);
+  // };
+
   useEffect(() => {
     generateRandomPositions();
   }, [skills]);
@@ -63,7 +77,7 @@ const SkillSet: React.FC<{ skills: ISkills[] }> = ({ skills }) => {
         let newX = pos.left + Math.cos(angle) * moveDistance;
         let newY = pos.top + Math.sin(angle) * moveDistance;
 
-        newX = Math.max(padding, Math.min(newX, 1000 - radius * 2 - bottomPadding));
+        newX = Math.max(padding, Math.min(newX, 1200 - radius * 2 - bottomPadding));
         newY = Math.max(padding, Math.min(newY, 550 - radius * 2 - bottomPadding));
 
         if (!checkCollision({ left: newX, top: newY }, positions.filter((_, i) => i !== index))) {
@@ -79,8 +93,8 @@ const SkillSet: React.FC<{ skills: ISkills[] }> = ({ skills }) => {
   return (
     <motion.div
       ref={containerRef}
-      className="relative flex items-center justify-center bg-game-bg-3 bg-cover rounded-box"
-      style={{ width: '1000px', height: '550px', padding: `0px 0px 0px 0px` }}
+      className="relative flex bg-center items-center justify-center bg-game-bg-3 bg-cover rounded-box"
+      style={{ width: '1200px', height: '550px', padding: `0px 0px 0px 0px` }}
       onViewportEnter={generateRandomPositions}
       onMouseMove={handleMouseMove}
     >

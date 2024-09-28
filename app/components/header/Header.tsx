@@ -45,7 +45,7 @@ const Header = () => {
             x: mousePosition.x - 60,
             y: mousePosition.y - 60,
             backgroundColor: 'white',
-            mixBlendMode: 'difference',
+            mixBlendMode: 'difference' as 'difference',
             transition: {
                 duration: 0.2,
                 type: 'spring',
@@ -59,7 +59,7 @@ const Header = () => {
             x: mousePosition.x - 25,
             y: mousePosition.y - 25,
             backgroundColor: 'white',
-            mixBlendMode: 'difference',
+            mixBlendMode: 'difference' as 'difference',
             transition: {
                 duration: 0.2,
                 type: 'spring',

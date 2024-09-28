@@ -2,6 +2,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { ISkills } from '../type';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const CircularBar: FunctionComponent<{ data: ISkills }> = ({ data: { name, level, icon } }) => {
     const [isInView, setIsInView] = useState(false);
@@ -66,7 +67,7 @@ const CircularBar: FunctionComponent<{ data: ISkills }> = ({ data: { name, level
             </svg>
 
             <div className="absolute flex flex-col items-center justify-center glass rounded-full z-0">
-                <img className='w-14 h-14 m-6' src={icon} alt="-" />
+                <Image height={50} width={50} className='m-4' src={icon} alt="-" />
             </div>
 
             <motion.div

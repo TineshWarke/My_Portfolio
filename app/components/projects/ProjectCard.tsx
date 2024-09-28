@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import { IProject } from '../type'
+import Image from 'next/image'
 
 const ProjectCard: FunctionComponent<{ project: IProject }> = ({
     project: {
@@ -9,7 +10,7 @@ const ProjectCard: FunctionComponent<{ project: IProject }> = ({
     return (
         <div className="card bg-gradient-to-b m-auto from-white/40 to-base-300/80 dark:to-green-500/80 to-80% glass h-[500px] shadow-xl cursor-pointer overflow-hidden">
             <figure className="px-10 pt-10">
-                <img src={image_path} alt={name} className="rounded-xl" />
+                <Image src={image_path} alt={name} height={350} width={450} className="rounded-xl" />
             </figure>
             <div className="card-body items-center text-center">
                 <h1 className="card-title">{name}</h1>
@@ -25,22 +26,24 @@ const ProjectCard: FunctionComponent<{ project: IProject }> = ({
 
                     <div className='flex flex-wrap gap-2 justify-center'>
                         {
-                            key_techs.map(tech =>
-                                <button className='btn glass m-1 dark:bg-black dark:btn-primary dark:text-white dark:border-white border-solid'>
-                                    {tech}
-                                </button>
+                            key_techs.map((tech, index) => (
+                                <div key={index}>
+                                    <button className='btn glass m-1 dark:bg-black dark:btn-primary dark:text-white dark:border-white border-solid'>
+                                        {tech}
+                                    </button>
+                                </div>)
                             )
                         }
                         <a href={github_url} target="_blank" rel="noopener noreferrer">
                             <button className='btn glass w-12 h-12 rounded-full p-0 mt-1 dark:bg-black dark:btn-primary dark:text-white dark:border-white my-2 border-solid'>
-                                <img src={'/icons/github-1.png'} alt={name} />
+                                <Image src={'/icons/github-1.png'} alt={name} height={40} width={40}/>
                             </button>
                         </a>
                         {
                             deployed_url ?
                                 <a href={deployed_url} target="_blank" rel="noopener noreferrer">
                                     <button className='btn glass w-12 h-12 rounded-full p-0 mt-1 dark:bg-black dark:btn-primary dark:text-white dark:border-white my-2 border-solid'>
-                                        <img src={'/icons/link.png'} alt={name} />
+                                        <Image src={'/icons/link.png'} alt={name} width={25} height={25} />
                                     </button>
                                 </a>
                                 : <a></a>

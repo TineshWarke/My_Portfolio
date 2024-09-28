@@ -1,6 +1,7 @@
 import React, { FunctionComponent, useState } from 'react'
 import { IContact } from '../type'
 import { motion } from 'framer-motion'
+import Image from 'next/image';
 
 const Contacts: FunctionComponent<{ contact: IContact }> = ({ contact: { name, logo, link } }) => {
   const [popup, setPopup] = useState(false);
@@ -11,7 +12,7 @@ const Contacts: FunctionComponent<{ contact: IContact }> = ({ contact: { name, l
         name !== 'Chess' ?
           <motion.div whileHover={{ scale: 1.12 }} whileTap={{ scale: 0.8 }} className='btn glass rounded-full pl-0 mx-1.5 dark:hover:bg-black dark:hover:border-white dark:hover:text-white dark:border-black border-solid'>
             <div className='flex rounded-full'>
-              <div className={`${name === 'LeetCode' ? 'bg-black' : ''} ${name === 'Github' ? 'bg-white' : ''} rounded-full w-[43px] h-[43px]`}><img src={logo} alt='-' /></div>
+              <div className={`${name === 'LeetCode' ? 'bg-black' : ''} ${name === 'Github' ? 'bg-white' : ''} rounded-full w-[43px] h-[43px]`}><Image src={logo} alt='-' height={43} width={43}/></div>
               <div className='p-2 text-lg text-center'>
                 {name}
               </div>
@@ -23,7 +24,7 @@ const Contacts: FunctionComponent<{ contact: IContact }> = ({ contact: { name, l
               className='btn p-0 glass rounded-full pl-0 mx-1.5 dark:hover:bg-black dark:hover:border-white dark:hover:text-white dark:border-black border-solid'
               onMouseEnter={() => setPopup(true)} onMouseLeave={() => setPopup(false)}>
               <div className='flex rounded-full p-1'>
-                <div className={`rounded-full w-[35px] h-[35px]`}><img src={logo} alt='-' /></div>
+                <div className={`rounded-full`}><Image height={35} width={35} src={logo} alt='-' /></div>
               </div>
             </motion.div>
             <div className={`${popup ? 'visible' : 'hidden'} absolute dark:bg-gray-800 dark:text-white p-2 mt-4 rounded-md shadow-lg`}>

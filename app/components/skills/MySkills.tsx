@@ -20,7 +20,7 @@ const MySkills = () => {
     }, []);
 
     return (
-        <div className="max-w-[1250px] m-auto p-4" id='skills'>
+        <div className="w-screen m-auto p-4" id='skills'>
             <div className="items-center justify-center w-fit h-fit m-auto p-7 glass rounded-box">
                 {isLargeScreen ?
                     <div className="relative bg-transparent flex items-center justify-center">

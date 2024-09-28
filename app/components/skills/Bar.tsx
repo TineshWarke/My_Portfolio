@@ -2,6 +2,7 @@
 import React, { FunctionComponent } from 'react';
 import { ISkills } from '../type';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 const Bar: FunctionComponent<{ data: ISkills }> = ({ data: { name, level, icon } }) => {
 
@@ -30,7 +31,7 @@ const Bar: FunctionComponent<{ data: ISkills }> = ({ data: { name, level, icon }
                 whileInView='animate'
                 viewport={{ once: true }}
             >
-                <img className='h-6 w-6 sm:h-8 sm:w-8' src={icon} alt={`${name} icon`} />
+                <Image height={6} width={6} src={icon} alt={`${name} icon`} />
                 <span className="text-xs sm:text-sm md:text-base">{name}</span>
             </motion.div>
         </div>
