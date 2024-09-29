@@ -51,7 +51,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu glass bg-black/80 menu-sm dropdown-content rounded-box z-[1] mt-3 w-auto p-2 shadow">
+                            className="menu glass menu-sm dropdown-content rounded-box z-[1] mt-3 w-auto p-2 shadow">
                             <li className='dark:text-green-500 font-bold' onClick={() => handleScroll("home")}><a>About </a></li>
                             <li className='dark:text-green-500 font-bold' onClick={() => handleScroll("strengths")}><a>Strengths </a></li>
                             <li className='dark:text-green-500 font-bold' onClick={() => handleScroll("resume")}><a>Resume </a></li>
