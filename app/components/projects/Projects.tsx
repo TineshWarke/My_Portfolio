@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { projects as projectData } from '../data'
 import ProjectCard from './ProjectCard'
 import { motion } from 'framer-motion'
@@ -10,9 +10,21 @@ import { Category } from '../type'
 const Projects = () => {
   const [projects, setProjects] = useState(projectData)
   const [active, setActive] = useState('all')
+  const [isLargeScreen, setIsLargeScreen] = useState(false);
+    useEffect(() => {
+        const handleResize = () => {
+            setIsLargeScreen(window.innerWidth >= 768);
+        };
+        handleResize();
+
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
+    }, []);
 
   const [currentPage, setCurrentPage] = useState(1)
-  const projectsPerPage = 6
+  const projectsPerPage = isLargeScreen ? 6 : 3
 
   const totalPages = Math.ceil(projects.length / projectsPerPage)
 
