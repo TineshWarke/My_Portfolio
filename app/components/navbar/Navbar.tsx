@@ -32,7 +32,7 @@ const Navbar = () => {
 
     return (
         <div className="navbar bg-transparent w-full sticky top-0 z-50">
-            <div className={`navbar ${visibility ? 'glass bg-base-300/50 dark:bg-transparent' : 'bg-transparent'} sticky shadow-xl rounded-box`}>
+            <div className={`navbar ${visibility ? 'glass bg-base-300/70 dark:bg-transparent' : 'bg-transparent'} sticky shadow-xl rounded-box`}>
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
