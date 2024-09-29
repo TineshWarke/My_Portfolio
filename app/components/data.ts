@@ -179,7 +179,7 @@ export const projects: IProject[] = [
     {
         name: 'Portfolio Website',
         description: [
-            'This is the portfolio website you are currently viewing. It is a single-page application built using React & Tailwind CSS, featuring smooth animations & transitions. The website is designed to be responsive, & visually appealing, ensuring an optimal experience across various devices.',
+            'This is the portfolio website you are currently viewing. It is a single-page application built using Next.js & Tailwind CSS, featuring smooth animations & transitions. The website is designed to be responsive, & visually appealing, ensuring an optimal experience across various devices.',
             '1. Built with Next.js, TypeScript, Tailwind CSS, DaisyUI, & Framer Motion to deliver a seamless & responsive user experience.',
             '2. Offers detailed project descriptions and insights into my journey as a full-stack developer, making it a valuable resource for potential collaborators and employers.',
             '3. Features smooth animations and interactive elements.',

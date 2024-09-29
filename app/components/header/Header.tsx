@@ -89,6 +89,24 @@ const Header = () => {
                 <div className='bg-game-bg-6 w-full h-full bg-cover bg-bottom rounded-box' />
             </div>
 
+            <div
+                className='w-[90%] max-w-[360px] h-[200px] sm:h-[250px] md:h-[310px] glass rounded-box absolute  -right-8 top-[600px] sm:top-[700px] md:top-[800px] lg:top-[1150px] p-5 cursor-pointer transition-opacity duration-500 ease-in-out opacity-0 sm:opacity-0 md:opacity-50 lg:opacity-75 xl:opacity-100'
+                style={{
+                    transform: `translateY(${-scrollY * 1.2}px) rotate(20deg)`
+                }}
+            >
+                <div className='bg-game-bg-7 w-full h-full bg-cover bg-center rounded-box' />
+            </div>
+
+            <div
+                className='w-[90%] max-w-[360px] h-[200px] sm:h-[250px] md:h-[310px] glass rounded-box absolute -left-24 top-[500px] sm:top-[600px] md:top-[700px] lg:top-[1050px] p-5 cursor-pointer transition-opacity duration-500 ease-in-out opacity-0 sm:opacity-0 md:opacity-50 lg:opacity-75 xl:opacity-100'
+                style={{
+                    transform: `translateY(${-scrollY * 1.2}px) rotate(-25deg)`
+                }}
+            >
+                <div className='bg-game-bg-8 w-full h-full bg-cover bg-center rounded-box' />
+            </div>
+
             <div className="hero pb-8">
                 <div className="hero-content text-neutral-content text-center w-full">
                     <div className="w-full">

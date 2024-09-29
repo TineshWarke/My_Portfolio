@@ -21,7 +21,7 @@ const MySkills = () => {
 
     return (
         <div className="w-screen m-auto p-4" id='skills'>
-            <div className="items-center justify-center w-fit h-fit m-auto p-7 glass rounded-box">
+            <div className="items-center justify-center w-fit h-fit m-auto p-7 glass bg-base-300/80 rounded-box">
                 {isLargeScreen ?
                     <div className="relative bg-transparent flex items-center justify-center">
                         <SkillSet skills={skills} />
