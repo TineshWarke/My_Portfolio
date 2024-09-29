@@ -260,4 +260,18 @@ export const projects: IProject[] = [
         category: ['React'],
         key_techs: ['React', 'TypeScript']
     },
+    {
+        name: 'Snake Game',
+        description: [
+            'I developed a classic Snake game using Python and Pygame, capturing the nostalgic feel of retro arcade games with modern enhancements. The game offers an enjoyable, straightforward experience, making it both fun and accessible for players of all ages.',
+            '1. The game allows players to control the snake`s movement using the arrow keys, ensuring smooth and responsive gameplay. This makes maneuvering through the grid feel natural and enjoyable.',
+            '2. Every time the snake eats the red food block, the score increases, which adds a fun challenge as the snake grows longer.',
+            '3. If the snake collides with itself or the game boundary, a game-over screen appears, allowing the player to restart or exit.'
+        ],
+        image_path: '/images/snake.png',
+        deployed_url: '',
+        github_url: 'https://github.com/TineshWarke/Snake.git',
+        category: ['Python'],
+        key_techs: ['Python', 'Pygame']
+    },
 ]

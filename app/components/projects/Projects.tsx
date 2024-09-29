@@ -11,17 +11,40 @@ const Projects = () => {
   const [projects, setProjects] = useState(projectData)
   const [active, setActive] = useState('all')
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const projectsPerPage = 6
+
+  const totalPages = Math.ceil(projects.length / projectsPerPage)
+
+  const indexOfLastProject = currentPage * projectsPerPage
+  const indexOfFirstProject = indexOfLastProject - projectsPerPage
+  const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject)
+
   const filterCategory = (category: Category | 'all') => {
     if (category === 'all') {
       setProjects(projectData)
       setActive(category)
-      return
+    } else {
+      const newData = projectData.filter((project) => project.category.includes(category))
+      setProjects(newData)
+      setActive(category)
     }
-
-    const newData = projectData.filter((project) => project.category.includes(category));
-    setProjects(newData)
-    setActive(category)
+    setCurrentPage(1)
   }
+
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber)
+  }
+
+  const handleScroll = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
 
   return (
     <div className="max-w-[1250px] mx-auto py-16 px-4" id='projects'>
@@ -35,15 +58,38 @@ const Projects = () => {
         <ProjectsNavbar filterCategory={filterCategory} active={active} />
       </div>
 
-      <motion.div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-3' variants={stagger} initial='initial' animate='animate'>
-        {
-          projects.map(project => (
-            <motion.div className='col-span-1 p-2' key={project.name} variants={fadeInUP}>
-              <ProjectCard project={project} key={project.name}/>
-            </motion.div>
-          ))
-        }
+      <motion.div
+        className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-3'
+        variants={stagger}
+        initial='initial'
+        animate='animate'
+      >
+        {currentProjects.map(project => (
+          <motion.div className='col-span-1 p-2' key={project.name} variants={fadeInUP}>
+            <ProjectCard project={project} />
+          </motion.div>
+        ))}
       </motion.div>
+
+      {totalPages > 1 && (
+        <div className="flex justify-center mt-6 mb-1">
+          <ul className="flex space-x-2">
+            {[...Array(totalPages)].map((_, index) => (
+              <li key={index}>
+                <button
+                  onClick={() => { handlePageChange(index + 1), handleScroll("projects") }}
+                  className={`px-3 py-1 rounded ${currentPage === index + 1
+                      ? 'bg-accent'
+                      : 'bg-base-100 '
+                    }`}
+                >
+                  {index + 1}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }

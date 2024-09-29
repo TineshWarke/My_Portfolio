@@ -7,16 +7,13 @@ const Resume = () => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsLargeScreen(window.innerWidth >= 768); // Adjust the breakpoint as needed
+            setIsLargeScreen(window.innerWidth >= 768);
         };
 
-        // Set initial value
         handleResize();
 
-        // Add event listener for resize
         window.addEventListener('resize', handleResize);
-
-        // Cleanup listener on component unmount
+        
         return () => {
             window.removeEventListener('resize', handleResize);
         };
