@@ -247,6 +247,20 @@ export const projects: IProject[] = [
         key_techs: ['React', 'JavaScript', 'CSS']
     },
     {
+        name: 'Inventory Management System',
+        description: [
+            'An Inventory Management System (IMS) built with Django and Bootstrap provides a powerful and responsive solution. This system offers a user-friendly interface while leveraging Django`s robust back-end to efficiently handle data processing.',
+            '1. Allows users to monitor stock levels and movements across multiple locations, ensuring up-to-date inventory information.',
+            '2. Admins can easily add, edit, or remove products with fields like SKU, name, category, and quantity, ensuring accurate inventory details.',
+            '3. Provides a smooth, responsive design with efficient state management, ensuring seamless navigation and real-time updates.'
+        ],
+        image_path: '/images/ims.png',
+        deployed_url: '',
+        github_url: 'https://github.com/TineshWarke/Inventory-Management-System.git',
+        category: ['Python'],
+        key_techs: ['Django', 'Bootstrap']
+    },
+    {
         name: 'Quiz App',
         description: [
             'A dynamic quiz app built with React and TypeScript, offering an engaging experience to test your knowledge across various categories. The app features intuitive navigation, real-time feedback, and a smooth user interface to make learning fun and interactive.',
