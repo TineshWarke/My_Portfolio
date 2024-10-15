@@ -34,11 +34,15 @@ const ProjectCard: FunctionComponent<{ project: IProject }> = ({
                                 </div>)
                             )
                         }
-                        <a href={github_url} target="_blank" rel="noopener noreferrer">
-                            <button className='btn glass w-12 h-12 rounded-full p-0 mt-1 dark:bg-black dark:btn-primary dark:text-white dark:border-white my-2 border-solid'>
-                                <Image src={'/icons/github-1.png'} alt={name} height={40} width={40}/>
-                            </button>
-                        </a>
+                        {
+                            github_url ?
+                                <a href={github_url} target="_blank" rel="noopener noreferrer">
+                                    <button className='btn glass w-12 h-12 rounded-full p-0 mt-1 dark:bg-black dark:btn-primary dark:text-white dark:border-white my-2 border-solid'>
+                                        <Image src={'/icons/github-1.png'} alt={name} height={40} width={40} />
+                                    </button>
+                                </a>
+                                : <a></a>
+                        }
                         {
                             deployed_url ?
                                 <a href={deployed_url} target="_blank" rel="noopener noreferrer">

@@ -247,6 +247,20 @@ export const projects: IProject[] = [
         key_techs: ['React', 'JavaScript', 'CSS']
     },
     {
+        name: 'Chess Game',
+        description: [
+            'The 2-player chess game is a web-based application designed to provide an engaging and interactive platform for chess enthusiasts. Developed using Next.js, TypeScript, and Tailwind CSS, focuses on delivering a seamless user experience through its intuitive design and robust functionality.',
+            '1. The application facilitating smooth piece movements and automatic turn changes to enhance the competitive experience.',
+            '2. The game is built to adapt to various screen sizes, ensuring that users can enjoy chess on desktops, tablets, and smartphones without any loss of functionality or design integrity',
+            '3. A comprehensive move validation feature is integrated to prevent illegal moves, ensuring a fair game.'
+        ],
+        image_path: '/images/chess.png',
+        deployed_url: '',
+        github_url: '',
+        category: ['React'],
+        key_techs: ['Next.js', 'TypeScript']
+    },
+    {
         name: 'Inventory Management System',
         description: [
             'An Inventory Management System (IMS) built with Django and Bootstrap provides a powerful and responsive solution. This system offers a user-friendly interface while leveraging Django`s robust back-end to efficiently handle data processing.',
