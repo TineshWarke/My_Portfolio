@@ -17,12 +17,14 @@ const ProjectCard: FunctionComponent<{ project: IProject }> = ({
                 <p className='text-justify'>{description[0]}</p>
             </div>
 
-            <div className="absolute  glass bg-base-300 dark:bg-black dark:text-white w-full h-0 z-10 m-0 rounded-box opacity-0 p-0 hover:opacity-90 hover:h-full duration-500">
+            <div className="absolute  glass bg-base-300 dark:bg-black dark:text-white w-full h-0 z-10 m-0 rounded-box opacity-0 p-0 hover:opacity-100 hover:h-full duration-500">
                 <div className="card-body">
                     <h2 className="card-title text-center dark:text-green-500">{name}</h2>
-                    <p className='text-justify'>{description[1]}</p>
-                    <p className='text-justify'>{description[2]}</p>
-                    <p className='text-justify'>{description[3]}</p>
+                    {
+                        description.map((point, index) => (
+                            index ? <p className='text-justify' key={index}>{point}</p> : ''
+                        ))
+                    }
 
                     <div className='flex flex-wrap gap-2 justify-center'>
                         {

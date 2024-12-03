@@ -215,7 +215,7 @@ export const projects: IProject[] = [
         image_path: '/images/voting.png',
         deployed_url: '',
         github_url: 'https://github.com/TineshWarke/e-Nirvachan_Online_Voting_System.git',
-        category: ['React', 'Java' , 'MySQL'],
+        category: ['React', 'Java', 'MySQL'],
         key_techs: ['React', 'Java', 'MySQL', 'Spring Boot']
     },
     {
@@ -223,7 +223,7 @@ export const projects: IProject[] = [
         description: [
             'Developed a sign language recognition tool aimed at facilitating communication for the deaf and hard-of-hearing communities, providing an intuitive and real-time solution to bridge the communication gap and promote inclusivity.',
             '1. Designed and implemented the neural network using Keras and TensorFlow, ensuring high accuracy in recognizing sign language gestures.',
-            "2. Utilized OpenCV for processing and annotating datasets, which contributed to the system's ability to recognize signs in real-time effectively." ,
+            "2. Utilized OpenCV for processing and annotating datasets, which contributed to the system's ability to recognize signs in real-time effectively.",
 
         ],
         image_path: '/images/slr.jpg',
@@ -245,6 +245,21 @@ export const projects: IProject[] = [
         github_url: 'https://tailwindcss.com/',
         category: ['React'],
         key_techs: ['React', 'JavaScript', 'CSS']
+    },
+    {
+        name: 'NextToDoApp',
+        description: [
+            'A Next.js Todo List App designed for easy task management. Users can add, complete, and delete tasks efficiently. With a clean, responsive design, this app helps you stay organized and focused on your tasks with a seamless experience.',
+            '1. Task Management: Add, delete, and mark tasks as completed with a simple checkbox toggle.',
+            '2. Responsive Design: The app is fully responsive, offering a smooth user experience on all devices.',
+            '3. Fast and Scalable: Built with Next.js, providing optimized performance and scalability for handling more tasks.',
+            '4. Clean and intuitive UI that allows to quickly interact with their tasks.'
+        ],
+        image_path: '/images/todo.png',
+        deployed_url: 'https://todo-list-eight-teal-73.vercel.app/',
+        github_url: 'https://github.com/TineshWarke/Todo_List.git',
+        category: ['React', "MongoDB"],
+        key_techs: ['Next.js', 'MongoDB']
     },
     {
         name: 'Chess Game',
