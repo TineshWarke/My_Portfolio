@@ -22,6 +22,7 @@ const ProjectsNavbar: FunctionComponent<{ filterCategory: Function, active: stri
             <NavItem value='Python' {...props} />
             <NavItem value='Express' {...props} />
             <NavItem value='React' {...props} />
+            <NavItem value='Next.js' {...props} />
             <NavItem value='MySQL' {...props} />
             <NavItem value='MongoDB' {...props} />
         </div>

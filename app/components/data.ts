@@ -177,6 +177,20 @@ export const skills: ISkills[] = [
 
 export const projects: IProject[] = [
     {
+        name: 'Data Structures & Algorithms Visualizer',
+        description: [
+            'A cutting-edge platform that transforms the learning journey of Data Structures and Algorithms by integrating visualization, hands-on coding, and progress tracking in an interactive and engaging way.',
+            '1. Understand complex DSA concepts through intuitive animations and real-world examples.',
+            '2. Explore ready-to-use code snippets in C, C++, Java, Python, and JavaScript for every topic.',
+            '3. Solve LeetCode problems, mark them as completed, earn badges, and track your learning journey with insightful analytics.',
+        ],
+        image_path: '/images/dsa.png',
+        deployed_url: 'https://dsa-visualizer-bytinesh.vercel.app/',
+        github_url: 'https://github.com/TineshWarke/dsa_visualizer.git',
+        category: ['Next.js', 'MongoDB'],
+        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
+    },
+    {
         name: 'Portfolio Website',
         description: [
             'This is the portfolio website you are currently viewing. It is a single-page application built using Next.js & Tailwind CSS, featuring smooth animations & transitions. The website is designed to be responsive, & visually appealing, ensuring an optimal experience across various devices.',
@@ -187,7 +201,7 @@ export const projects: IProject[] = [
         image_path: '/images/portfolio.png',
         deployed_url: 'https://tineshwarke-portfolio.vercel.app/',
         github_url: 'https://github.com/TineshWarke/My_Portfolio.git',
-        category: ['React'],
+        category: ['Next.js'],
         key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
     },
     {
@@ -258,7 +272,7 @@ export const projects: IProject[] = [
         image_path: '/images/todo.png',
         deployed_url: 'https://todo-list-eight-teal-73.vercel.app/',
         github_url: 'https://github.com/TineshWarke/Todo_List.git',
-        category: ['React', "MongoDB"],
+        category: ['Next.js', "MongoDB"],
         key_techs: ['Next.js', 'MongoDB']
     },
     {
@@ -272,7 +286,7 @@ export const projects: IProject[] = [
         image_path: '/images/chess.png',
         deployed_url: '',
         github_url: '',
-        category: ['React'],
+        category: ['Next.js'],
         key_techs: ['Next.js', 'TypeScript']
     },
     {

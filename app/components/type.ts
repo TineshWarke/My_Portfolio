@@ -17,7 +17,7 @@ export interface ISkills {
     icon: string
 }
 
-export type Category = 'React' | 'Java' | 'Python' | 'Express' | 'MySQL' | 'MongoDB'
+export type Category = 'React' | 'Java' | 'Python' | 'Express' | 'MySQL' | 'MongoDB' | 'Next.js'
 
 export interface IProject {
     name: string,
