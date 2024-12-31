@@ -177,6 +177,20 @@ export const skills: ISkills[] = [
 
 export const projects: IProject[] = [
     {
+        name: '',
+        description: [
+            'A user-friendly web application built with Next.js that allows individuals to create, customize, and download professional resumes. With an intuitive interface and powerful features, this tool empowers users to build and personalize their resumes effortlessly.',
+            '1. Real-Time Preview: As users input their details, the changes are immediately reflected in the resume preview, providing an interactive experience.',
+            '2. Choose from various resume templates and effortlessly switch between them to create a professional look tailored to personal preferences.',
+            '3. Once the resume is complete, users can download it as a high-quality PDF, ready for sharing or printing.',
+        ],
+        image_path: '/images/resume-builder.png',
+        deployed_url: 'https://resume-builder-ten-neon.vercel.app/',
+        github_url: 'https://github.com/TineshWarke/resume-builder.git',
+        category: ['Next.js'],
+        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
+    },
+    {
         name: 'Data Structures & Algorithms Visualizer',
         description: [
             'A cutting-edge platform that transforms the learning journey of Data Structures and Algorithms by integrating visualization, hands-on coding, and progress tracking in an interactive and engaging way.',
@@ -188,7 +202,7 @@ export const projects: IProject[] = [
         deployed_url: 'https://dsa-visualizer-bytinesh.vercel.app/',
         github_url: 'https://github.com/TineshWarke/dsa_visualizer.git',
         category: ['Next.js', 'MongoDB'],
-        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
+        key_techs: ['Next.js', 'TypeScript', 'MongoDB']
     },
     {
         name: 'Portfolio Website',
