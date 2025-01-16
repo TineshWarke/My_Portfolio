@@ -28,3 +28,11 @@ export interface IProject {
     category: Category[],
     key_techs: string[]
 }
+
+export interface IEducation {
+    degree: string,
+    institution: string,
+    grade: string,
+    year: string,
+    image_path: string,
+}

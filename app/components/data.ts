@@ -1,5 +1,5 @@
 import { Bs0CircleFill } from "react-icons/bs";
-import { IContact, IProject, IService, ISkills } from "./type";
+import { IContact, IEducation, IProject, IService, ISkills } from "./type";
 
 export const contacts: IContact[] = [
     {
@@ -75,12 +75,12 @@ export const services: IService[] = [
 export const skills: ISkills[] = [
     {
         name: 'C',
-        level: '80%',
+        level: '70%',
         icon: '/logos/c.png'
     },
     {
         name: 'C++',
-        level: '85%',
+        level: '75%',
         icon: '/logos/cpp.png'
     },
     {
@@ -95,12 +95,12 @@ export const skills: ISkills[] = [
     },
     {
         name: 'Python',
-        level: '75%',
+        level: '70%',
         icon: '/logos/python.png'
     },
     {
         name: 'MySQL',
-        level: '70%',
+        level: '75%',
         icon: '/logos/mysql.png'
     },
     {
@@ -110,17 +110,17 @@ export const skills: ISkills[] = [
     },
     {
         name: 'CSS',
-        level: '65%',
+        level: '70%',
         icon: '/logos/css.png'
     },
     {
-        name: 'Java-Scrpt',
-        level: '75%',
+        name: 'Java-Script',
+        level: '85%',
         icon: '/logos/java-script.png'
     },
     {
         name: 'MongoDB',
-        level: '65%',
+        level: '70%',
         icon: '/logos/mongo.png'
     },
     {
@@ -140,22 +140,22 @@ export const skills: ISkills[] = [
     },
     {
         name: 'TypeScript',
-        level: '60%',
+        level: '75%',
         icon: '/logos/typescript.png'
     },
     {
         name: 'NextJS',
-        level: '50%',
+        level: '80%',
         icon: '/logos/nextjs.png'
     },
     {
         name: 'Tailwind CSS',
-        level: '70%',
+        level: '90%',
         icon: '/logos/tailwind.png'
     },
     {
         name: 'DaisyUI',
-        level: '70%',
+        level: '80%',
         icon: '/logos/daisyui.png'
     },
     {
@@ -170,14 +170,14 @@ export const skills: ISkills[] = [
     },
     {
         name: 'Framer Motion',
-        level: '50%',
+        level: '60%',
         icon: '/logos/framer.png'
     },
 ]
 
 export const projects: IProject[] = [
     {
-        name: '',
+        name: 'Resume Builder',
         description: [
             'A user-friendly web application built with Next.js that allows individuals to create, customize, and download professional resumes. With an intuitive interface and powerful features, this tool empowers users to build and personalize their resumes effortlessly.',
             '1. Real-Time Preview: As users input their details, the changes are immediately reflected in the resume preview, providing an interactive experience.',
@@ -344,5 +344,22 @@ export const projects: IProject[] = [
         github_url: 'https://github.com/TineshWarke/Snake.git',
         category: ['Python'],
         key_techs: ['Python', 'Pygame']
+    },
+]
+
+export const education: IEducation[] = [
+    {
+        degree: 'Bachelor of Technology in Computer Science',
+        institution: 'R. C. Patel Institute of Technology, Shirpur',
+        grade: 'CGPA : 7.48',
+        year: '2019 - 2023',
+        image_path: '/institution/rcpit.png'
+    },
+    {
+        degree: 'C-DAC : [PG-DAC]',
+        institution: 'Institute for Advanced Computing and Software Development, Akurdi',
+        grade: 'Percentage : 81.75%',
+        year: '- 2024',
+        image_path: '/institution/cdac.png'
     },
 ]

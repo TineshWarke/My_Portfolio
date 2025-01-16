@@ -52,14 +52,15 @@ const Navbar = () => {
                         <ul
                             tabIndex={0}
                             className="menu glass menu-sm dropdown-content rounded-box z-[1] mt-3 w-auto p-2 shadow">
-                            <li className='dark:text-green-500 font-bold' onClick={() => handleScroll("home")}><a>About </a></li>
-                            <li className='dark:text-green-500 font-bold' onClick={() => handleScroll("strengths")}><a>Strengths </a></li>
-                            <li className='dark:text-green-500 font-bold' onClick={() => handleScroll("resume")}><a>Resume </a></li>
-                            <li className='dark:text-green-500 font-bold' onClick={() => handleScroll("projects")}><a>Projects </a></li>
-                            <li className='dark:text-green-500 font-bold' onClick={() => handleScroll("skills")}><a>Skills </a></li>
+                            <li className='font-bold' onClick={() => handleScroll("home")}><a>About </a></li>
+                            <li className='font-bold' onClick={() => handleScroll("education")}><a>Education </a></li>
+                            <li className='font-bold' onClick={() => handleScroll("strengths")}><a>Strengths </a></li>
+                            <li className='font-bold' onClick={() => handleScroll("resume")}><a>Resume </a></li>
+                            <li className='font-bold' onClick={() => handleScroll("projects")}><a>Projects </a></li>
+                            <li className='font-bold' onClick={() => handleScroll("skills")}><a>Skills </a></li>
                             <li>
                                 <details>
-                                    <summary className='dark:text-green-500 font-bold'>Theme</summary>
+                                    <summary className='font-bold'>Theme</summary>
                                     <Theme />
                                 </details>
                             </li>
@@ -69,14 +70,15 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li className='dark:text-white dark:hover:text-green-500 font-bold' onClick={() => handleScroll("home")}><a>About </a></li>
-                        <li className='dark:text-white dark:hover:text-green-500 font-bold' onClick={() => handleScroll("strengths")}><a>Strengths </a></li>
-                        <li className='dark:text-white dark:hover:text-green-500 font-bold' onClick={() => handleScroll("resume")}><a>Resume </a></li>
-                        <li className='dark:text-white dark:hover:text-green-500 font-bold' onClick={() => handleScroll("projects")}><a>Projects </a></li>
-                        <li className='dark:text-white dark:hover:text-green-500 font-bold' onClick={() => handleScroll("skills")}><a>Skills </a></li>
+                        <li className='0 font-bold' onClick={() => handleScroll("home")}><a>About </a></li>
+                        <li className='font-bold' onClick={() => handleScroll("education")}><a>Education </a></li>
+                        <li className='font-bold' onClick={() => handleScroll("strengths")}><a>Strengths </a></li>
+                        <li className='font-bold' onClick={() => handleScroll("resume")}><a>Resume </a></li>
+                        <li className='font-bold' onClick={() => handleScroll("projects")}><a>Projects </a></li>
+                        <li className='font-bold' onClick={() => handleScroll("skills")}><a>Skills </a></li>
                         <li>
                             <details>
-                                <summary className='mr-3 dark:text-white dark:hover:text-green-500 font-bold'>Theme</summary>
+                                <summary className='mr-3 font-bold'>Theme</summary>
                                 <Theme />
                             </details>
                         </li>

@@ -15,7 +15,7 @@ const ServiceCard: FunctionComponent<{ service: IService }> = ({ service: { titl
         <Image height={60} width={60} className='my-auto lg:ml-6 lg:mr-4 bg-transparent object-cover' src={icon} alt={title} />
       </div>
       <div className='flex-grow max-w-full pr-3'>
-        <h4 className='text-lg md:text-xl dark:text-green-500 font-bold'>{title}</h4>
+        <h4 className='text-lg md:text-xl font-bold'>{title}</h4>
         <p className='text-sm md:text-base text-justify' dangerouslySetInnerHTML={createMarkup()} />
       </div>
     </div>
