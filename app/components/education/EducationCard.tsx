@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { IEducation, IService } from '../type';
+import { IEducation } from '../type';
 import Image from 'next/image';
 
 const EducationCard: FunctionComponent<{ education: IEducation }> = ({ education: { degree, institution, grade, year, image_path } }) => {
@@ -10,7 +10,7 @@ const EducationCard: FunctionComponent<{ education: IEducation }> = ({ education
                 <Image height={60} width={60} className='my-auto lg:ml-6 lg:mr-4 bg-transparent object-cover' src={image_path} alt={'institution logo'} />
             </div>
             <div className='flex-grow max-w-full pr-3'>
-                <h4 className='text-xl md:text-lg font-bold'>{degree}</h4>
+                <h4 className='text-lg md:text-xl font-bold'>{degree}</h4>
                 <h4 className='text-sm md:text-base text-justify'>{institution}</h4>
                 <h4 className='text-sm md:text-base flex justify-between'><span>{grade}</span> <span>{year}</span></h4>
             </div>
