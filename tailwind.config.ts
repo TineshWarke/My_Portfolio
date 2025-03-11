@@ -21,7 +21,8 @@ const config: Config = {
         'game-bg-7': "url('../public/images/game-bg-7.gif')",
         'game-bg-8': "url('../public/images/game-bg-8.gif')",
         'game-bg-9': "url('../public/images/game-bg-9.gif')",
-        'resume-bg-1': "url('../public/images/resume-bg-1.png')",
+        'game-bg-10': "url('../public/images/game-bg-10.gif')",
+        'resume-bg-1': "url('../public/images/resume-bg-4.png')",
       },
       fontFamily: {
         'minecraft': ["Tiny5"],

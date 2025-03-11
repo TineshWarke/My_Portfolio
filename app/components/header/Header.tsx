@@ -47,10 +47,10 @@ const Header = () => {
             backgroundColor: 'white',
             mixBlendMode: 'difference' as 'difference',
             transition: {
-                duration: 0.2,
+                duration: 0.3,
                 type: 'spring',
                 damping: 8,
-                stiffness: 90
+                stiffness: 80
             }
         },
         animatesmall: {
@@ -61,7 +61,7 @@ const Header = () => {
             backgroundColor: 'white',
             mixBlendMode: 'difference' as 'difference',
             transition: {
-                duration: 0.2,
+                duration: 0.3,
                 type: 'spring',
                 damping: 10,
                 stiffness: 90

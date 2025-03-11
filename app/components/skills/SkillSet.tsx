@@ -93,7 +93,7 @@ const SkillSet: React.FC<{ skills: ISkills[] }> = ({ skills }) => {
   return (
     <motion.div
       ref={containerRef}
-      className="relative flex bg-center items-center justify-center bg-game-bg-3 bg-cover rounded-box"
+      className="relative flex bg-center items-center justify-center bg-game-bg-10 bg-cover rounded-box"
       style={{ width: '1200px', height: '550px', padding: `0px 0px 0px 0px` }}
       onViewportEnter={generateRandomPositions}
       onMouseMove={handleMouseMove}

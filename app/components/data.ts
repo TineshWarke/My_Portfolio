@@ -362,4 +362,11 @@ export const education: IEducation[] = [
         year: '- 2024',
         image_path: '/institution/cdac.png'
     },
+    {
+        degree: 'DSA & System Design Certification',
+        institution: 'HeyCoach',
+        grade: '',
+        year: '- 2025',
+        image_path: '/institution/heycoach.png'
+    },
 ]
