@@ -177,6 +177,20 @@ export const skills: ISkills[] = [
 
 export const projects: IProject[] = [
     {
+        name: 'AI Interview Coach',
+        description: [
+            'Enhance your interview preparation with AI-driven mock interviews designed to simulate real-world job scenarios. This intelligent system tailors questions based on your job role and experience level, ensuring a highly relevant and immersive experience.',
+            '1. Start by selecting your job role and experience level for a personalized interview experience.',
+            '2. Answer a mix of technical and behavioral questions in a realistic, timed environment.',
+            '3. Get instant AI-generated feedback with ratings, insights, and suggestions for improvement.'
+        ],
+        image_path: '/images/interview.png',
+        deployed_url: 'https://aiinterviewcoach.vercel.app/dashboard',
+        github_url: 'https://github.com/TineshWarke/Ai-Mock-Interview.git',
+        category: ['Next.js'],
+        key_techs: ['NextJS', 'TypeScript', 'PostgreSQL', 'Tailwind Css']
+    },
+    {
         name: 'Resume Builder',
         description: [
             'A user-friendly web application built with Next.js that allows individuals to create, customize, and download professional resumes. With an intuitive interface and powerful features, this tool empowers users to build and personalize their resumes effortlessly.',
