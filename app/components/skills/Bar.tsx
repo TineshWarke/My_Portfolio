@@ -24,7 +24,7 @@ const Bar: FunctionComponent<{ data: ISkills }> = ({ data: { name, level, icon }
     return (
         <div className='text-white glass rounded-full my-2 w-[90%]'>
             <motion.div
-                className="bg-gradient-to-r from-green-500 to-blue-600 px-4 py-1 flex items-center rounded-full"
+                className="bg-gradient-to-r from-base-300 to-black px-4 py-1 flex items-center rounded-full"
                 style={{ width: level }}
                 variants={variants}
                 initial='initial'

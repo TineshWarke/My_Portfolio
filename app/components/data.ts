@@ -261,7 +261,7 @@ export const projects: IProject[] = [
         key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
     },
     {
-        name: 'Sign Language Recognition Using Deep Learning ',
+        name: 'Sign Language Recognition Using Deep Learning',
         description: [
             'Developed a sign language recognition tool aimed at facilitating communication for the deaf and hard-of-hearing communities, providing an intuitive and real-time solution to bridge the communication gap and promote inclusivity.',
             '1. Designed and implemented the neural network using Keras and TensorFlow, ensuring high accuracy in recognizing sign language gestures.',
@@ -389,5 +389,12 @@ export const education: IEducation[] = [
         grade: 'Percentage : 81.75%',
         year: '- 2024',
         image_path: '/institution/cdac.png'
+    },
+    {
+        degree: 'DSA & System Design Certification',
+        institution: 'HeyCoach',
+        grade: '',
+        year: '- 2025',
+        image_path: '/institution/heycoach.png'
     },
 ]
