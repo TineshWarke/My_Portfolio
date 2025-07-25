@@ -177,46 +177,18 @@ export const skills: ISkills[] = [
 
 export const projects: IProject[] = [
     {
-        name: 'Resume Builder',
+        name: 'Connect 4 – Multiplayer Game',
         description: [
-            'A user-friendly web application built with Next.js that allows individuals to create, customize, and download professional resumes. With an intuitive interface and powerful features, this tool empowers users to build and personalize their resumes effortlessly.',
-            '1. Real-Time Preview: As users input their details, the changes are immediately reflected in the resume preview, providing an interactive experience.',
-            '2. Choose from various resume templates and effortlessly switch between them to create a professional look tailored to personal preferences.',
-            '3. Once the resume is complete, users can download it as a high-quality PDF, ready for sharing or printing.',
+            'A real-time, backend-driven Connect Four game built as part of a Backend Engineering Internship assignment. It allows 1v1 multiplayer gameplay with bot fallback, stateful matchmaking, and Kafka-based analytics tracking.',
+            '1. Developed backend using Node.js with WebSocket for real-time communication, handling game state, reconnection, and bot interaction.',
+            '2. Implemented a competitive bot that analyzes the board to block player wins and pursue its own winning strategy.',
+            '3. Built a minimal frontend using Next.js to allow username input, interactive grid play, real-time updates, and leaderboard view.'
         ],
-        image_path: '/images/resume-builder.png',
-        deployed_url: 'https://resume-builder-ten-neon.vercel.app/',
-        github_url: 'https://github.com/TineshWarke/resume-builder.git',
-        category: ['Next.js'],
-        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
-    },
-    {
-        name: 'Data Structures & Algorithms Visualizer',
-        description: [
-            'A cutting-edge platform that transforms the learning journey of Data Structures and Algorithms by integrating visualization, hands-on coding, and progress tracking in an interactive and engaging way.',
-            '1. Understand complex DSA concepts through intuitive animations and real-world examples.',
-            '2. Explore ready-to-use code snippets in C, C++, Java, Python, and JavaScript for every topic.',
-            '3. Solve LeetCode problems, mark them as completed, earn badges, and track your learning journey with insightful analytics.',
-        ],
-        image_path: '/images/dsa.png',
-        deployed_url: 'https://dsa-visualizer-bytinesh.vercel.app/',
-        github_url: 'https://github.com/TineshWarke/dsa_visualizer.git',
+        image_path: '/images/connect4.png',
+        deployed_url: 'https://connect-four-ql2d.onrender.com/lobby',
+        github_url: 'https://github.com/TineshWarke/Connect-Four',
         category: ['Next.js', 'MongoDB'],
-        key_techs: ['Next.js', 'TypeScript', 'MongoDB']
-    },
-    {
-        name: 'Portfolio Website',
-        description: [
-            'This is the portfolio website you are currently viewing. It is a single-page application built using Next.js & Tailwind CSS, featuring smooth animations & transitions. The website is designed to be responsive, & visually appealing, ensuring an optimal experience across various devices.',
-            '1. Built with Next.js, TypeScript, Tailwind CSS, DaisyUI, & Framer Motion to deliver a seamless & responsive user experience.',
-            '2. Offers detailed project descriptions and insights into my journey as a full-stack developer, making it a valuable resource for potential collaborators and employers.',
-            '3. Features smooth animations and interactive elements.',
-        ],
-        image_path: '/images/portfolio.png',
-        deployed_url: 'https://tineshwarke-portfolio.vercel.app/',
-        github_url: 'https://github.com/TineshWarke/My_Portfolio.git',
-        category: ['Next.js'],
-        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
+        key_techs: ['WebSocket', 'MongoDb', 'Next.js', ]
     },
     {
         name: 'Map My Story',
@@ -247,6 +219,48 @@ export const projects: IProject[] = [
         key_techs: ['React', 'Java', 'MySQL', 'Spring Boot']
     },
     {
+        name: 'AI Interview Coach',
+        "description": [
+            "Enhance your interview preparation with AI-driven mock interviews and a built-in Resume Score Analyzer. Get tailored questions based on your role and experience level, along with resume analysis for an ATS-friendly score and improvement tips.",
+            "1. Get a personalized interview experience with AI-driven questions tailored to your role and level.",
+            "2. Receive instant feedback with ratings, insights, and suggestions to improve your interview performance.",
+            "3. Upload your resume to the and get an ATS-friendly score with pros, cons, and optimization tips."
+        ],
+        image_path: '/images/interview.png',
+        deployed_url: 'https://aiinterviewcoach.vercel.app/dashboard',
+        github_url: 'https://github.com/TineshWarke/Ai-Mock-Interview.git',
+        category: ['Next.js'],
+        key_techs: ['NextJS', 'TypeScript', 'PostgreSQL', 'Tailwind Css', 'Gemini AI']
+    },
+    {
+        name: 'Data Structures & Algorithms Visualizer',
+        description: [
+            'A cutting-edge platform that transforms the learning journey of Data Structures and Algorithms by integrating visualization, hands-on coding, and progress tracking in an interactive and engaging way.',
+            '1. Understand complex DSA concepts through intuitive animations and real-world examples.',
+            '2. Explore ready-to-use code snippets in C, C++, Java, Python, and JavaScript for every topic.',
+            '3. Solve LeetCode problems, mark them as completed, earn badges, and track your learning journey with insightful analytics.',
+        ],
+        image_path: '/images/dsa.png',
+        deployed_url: 'https://dsa-visualizer-bytinesh.vercel.app/',
+        github_url: 'https://github.com/TineshWarke/dsa_visualizer.git',
+        category: ['Next.js', 'MongoDB'],
+        key_techs: ['Next.js', 'TypeScript', 'MongoDB']
+    },
+    {
+        name: 'Portfolio Website',
+        description: [
+            'This is the portfolio website you are currently viewing. It is a single-page application built using Next.js & Tailwind CSS, featuring smooth animations & transitions. The website is designed to be responsive, & visually appealing, ensuring an optimal experience across various devices.',
+            '1. Built with Next.js, TypeScript, Tailwind CSS, DaisyUI, & Framer Motion to deliver a seamless & responsive user experience.',
+            '2. Offers detailed project descriptions and insights into my journey as a full-stack developer, making it a valuable resource for potential collaborators and employers.',
+            '3. Features smooth animations and interactive elements.',
+        ],
+        image_path: '/images/portfolio.png',
+        deployed_url: 'https://tineshwarke-portfolio.vercel.app/',
+        github_url: 'https://github.com/TineshWarke/My_Portfolio.git',
+        category: ['Next.js'],
+        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
+    },
+    {
         name: 'Sign Language Recognition Using Deep Learning ',
         description: [
             'Developed a sign language recognition tool aimed at facilitating communication for the deaf and hard-of-hearing communities, providing an intuitive and real-time solution to bridge the communication gap and promote inclusivity.',
@@ -259,6 +273,20 @@ export const projects: IProject[] = [
         github_url: 'https://github.com/TineshWarke/Sign_Language_Recognition.git',
         category: ['Python'],
         key_techs: ['Python', 'CNNs', 'OpenCV', 'Keras']
+    },
+    {
+        name: 'Resume Builder',
+        description: [
+            'A user-friendly web application built with Next.js that allows individuals to create, customize, and download professional resumes. With an intuitive interface and powerful features, this tool empowers users to build and personalize their resumes effortlessly.',
+            '1. Real-Time Preview: As users input their details, the changes are immediately reflected in the resume preview, providing an interactive experience.',
+            '2. Choose from various resume templates and effortlessly switch between them to create a professional look tailored to personal preferences.',
+            '3. Once the resume is complete, users can download it as a high-quality PDF, ready for sharing or printing.',
+        ],
+        image_path: '/images/resume-builder.png',
+        deployed_url: 'https://resume-builder-ten-neon.vercel.app/',
+        github_url: 'https://github.com/TineshWarke/resume-builder.git',
+        category: ['Next.js'],
+        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
     },
     {
         name: 'Drum Kit',
