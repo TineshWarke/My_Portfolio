@@ -188,7 +188,7 @@ export const projects: IProject[] = [
         deployed_url: 'https://connect-four-ql2d.onrender.com/lobby',
         github_url: 'https://github.com/TineshWarke/Connect-Four',
         category: ['Next.js', 'MongoDB'],
-        key_techs: ['WebSocket', 'MongoDb', 'Next.js', ]
+        key_techs: ['WebSocket', 'MongoDb', 'Next.js',]
     },
     {
         name: 'Map My Story',
@@ -219,6 +219,19 @@ export const projects: IProject[] = [
         key_techs: ['React', 'Java', 'MySQL', 'Spring Boot']
     },
     {
+        name: 'Store Rating Platform',
+        description: [
+            'A role-based full-stack web application with secure authentication, store management, and a dynamic rating system, built using React, Node.js, and MongoDB databases to provide tailored dashboards for administrators, store owners, and users.',
+            '1. Implemented role-based access control with login/signup flows, enabling System Admins, Store Owners, and Normal Users to access distinct functionalities.',
+            '2. Built dashboards for admins (user/store/rating analytics), store owners (average ratings & user submissions), and users (browse/search stores, rate & update ratings).',
+        ],
+        image_path: '/images/store-rating-platform.png',
+        deployed_url: 'https://store-rating-platform-1wxo.vercel.app/admin/dashboard',
+        github_url: 'https://github.com/TineshWarke/store-rating-platform',
+        category: ['React', 'Express', 'MongoDB'],
+        key_techs: ['React.js', 'Express.js', 'JWT', 'MongoDB']
+    },
+    {
         name: 'AI Interview Coach',
         "description": [
             "Enhance your interview preparation with AI-driven mock interviews and a built-in Resume Score Analyzer. Get tailored questions based on your role and experience level, along with resume analysis for an ATS-friendly score and improvement tips.",
@@ -247,18 +260,18 @@ export const projects: IProject[] = [
         key_techs: ['Next.js', 'TypeScript', 'MongoDB']
     },
     {
-        name: 'Portfolio Website',
+        name: 'Crypto Portfolio Dashboard',
         description: [
-            'This is the portfolio website you are currently viewing. It is a single-page application built using Next.js & Tailwind CSS, featuring smooth animations & transitions. The website is designed to be responsive, & visually appealing, ensuring an optimal experience across various devices.',
-            '1. Built with Next.js, TypeScript, Tailwind CSS, DaisyUI, & Framer Motion to deliver a seamless & responsive user experience.',
-            '2. Offers detailed project descriptions and insights into my journey as a full-stack developer, making it a valuable resource for potential collaborators and employers.',
-            '3. Features smooth animations and interactive elements.',
+            'A responsive and interactive dashboard built with React and Redux Toolkit, designed to track live cryptocurrency markets and manage personal portfolios with real-time updates, advanced search, filtering, and persistent state management.',
+            '1. Implemented end-to-end state management with Redux Toolkit (createSlice, createAsyncThunk).',
+            '2. Integrated CoinGecko API to fetch coin list, current USD price, 24h % change, and market cap.',
+            '3. Developed a Portfolio module where users input per-coin holdings; computes total USD value and 24h P&L that update in real time as prices refresh.',
         ],
-        image_path: '/images/portfolio.png',
-        deployed_url: 'https://tineshwarke-portfolio.vercel.app/',
-        github_url: 'https://github.com/TineshWarke/My_Portfolio.git',
-        category: ['Next.js'],
-        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
+        image_path: '/images/crypto-portfolio.png',
+        deployed_url: 'https://crypto-portfolio-dashboard-three.vercel.app/dashboard',
+        github_url: 'https://github.com/TineshWarke/Crypto-Portfolio-Dashboard',
+        category: ['React'],
+        key_techs: ['Redux Toolkit', 'React Router', 'react-hook-form']
     },
     {
         name: 'Sign Language Recognition Using Deep Learning',
@@ -273,6 +286,20 @@ export const projects: IProject[] = [
         github_url: 'https://github.com/TineshWarke/Sign_Language_Recognition.git',
         category: ['Python'],
         key_techs: ['Python', 'CNNs', 'OpenCV', 'Keras']
+    },
+    {
+        name: 'Portfolio Website',
+        description: [
+            'This is the portfolio website you are currently viewing. It is a single-page application built using Next.js & Tailwind CSS, featuring smooth animations & transitions. The website is designed to be responsive, & visually appealing, ensuring an optimal experience across various devices.',
+            '1. Built with Next.js, TypeScript, Tailwind CSS, DaisyUI, & Framer Motion to deliver a seamless & responsive user experience.',
+            '2. Offers detailed project descriptions and insights into my journey as a full-stack developer, making it a valuable resource for potential collaborators and employers.',
+            '3. Features smooth animations and interactive elements.',
+        ],
+        image_path: '/images/portfolio.png',
+        deployed_url: 'https://tineshwarke-portfolio.vercel.app/',
+        github_url: 'https://github.com/TineshWarke/My_Portfolio.git',
+        category: ['Next.js'],
+        key_techs: ['Next.js', 'TypeScript', 'Tailwind CSS']
     },
     {
         name: 'Resume Builder',
