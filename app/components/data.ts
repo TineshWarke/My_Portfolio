@@ -20,7 +20,7 @@ export const contacts: IContact[] = [
     {
         name: 'LeetCode',
         logo: '/icons/LeetCode.png',
-        link: 'https://leetcode.com/u/Tinesh_Warke/'
+        link: 'https://leetcode.com/u/Tinesh_Warake/'
     },
     {
         name: 'Chess',

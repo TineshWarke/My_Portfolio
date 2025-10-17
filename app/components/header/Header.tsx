@@ -122,7 +122,7 @@ const Header = () => {
                             }}
                             className='w-fit m-auto cursor-none'>
                             <motion.div className='bg-transparent opacity-70 h-0 w-0 rounded-full fixed top-0 left-0 pointer-events-none' variants={varients} animate={cursorVarient} />
-                            <h1 className="font-Sofadi-One lg:text-9xl text-7xl font-bold" onMouseEnter={() => setCursorVarient('animate')} onMouseLeave={() => setCursorVarient('default')}>Tinesh Warke</h1>
+                            <h1 className="font-Sofadi-One lg:text-9xl text-7xl font-bold" onMouseEnter={() => setCursorVarient('animate')} onMouseLeave={() => setCursorVarient('default')}>Tinesh Warake</h1>
                         </motion.div>
                         <div className='w-fit m-auto cursor-none'>
                             <h1 className="font-Sofadi-One text-2xl sm:text-4xl font-medium tracking-widest" onMouseEnter={() => setCursorVarient('animatesmall')} onMouseLeave={() => setCursorVarient('default')}>Coding the Future: Full-Stack</h1>
