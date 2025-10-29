@@ -1,5 +1,4 @@
-import { Bs0CircleFill } from "react-icons/bs";
-import { IContact, IEducation, IProject, IService, ISkills } from "./type";
+import { IContact, IEducation, IExperience, IProject, IService, ISkills } from "./type";
 
 export const contacts: IContact[] = [
     {
@@ -11,6 +10,11 @@ export const contacts: IContact[] = [
         name: 'Github',
         logo: '/icons/social.png',
         link: 'https://github.com/TineshWarke'
+    },
+    {
+        name: 'Fiverr',
+        logo: '/icons/fiverr-icon.png',
+        link: 'https://www.fiverr.com/tinesh_warke'
     },
     {
         name: 'Email',
@@ -29,7 +33,7 @@ export const contacts: IContact[] = [
     },
 ]
 
-export const intro: string = "Allow me to introduce myself—I'm Tinesh Warke, a software engineer with a profound love for exploring the vast realm of technology " +
+export const intro: string = "Allow me to introduce myself—I'm Tinesh Warake, a software engineer with a profound love for exploring the vast realm of technology " +
     "and crafting innovative applications. I find immense joy in staying at the forefront of emerging technologies, constantly seeking " +
     "new challenges to broaden my skill set and push the boundaries of what I can achieve. There's nothing quite like the satisfaction " +
     "of transforming ideas into functional and user-friendly solutions."
@@ -423,5 +427,20 @@ export const education: IEducation[] = [
         grade: '',
         year: '- 2025',
         image_path: '/institution/heycoach.png'
+    },
+]
+
+export const experience: IExperience[] = [
+    {
+        role: 'Freelance Full Stack Developer | Fiverr (Remote)',
+        year: 'September 2025 – Present',
+        tech_stack: 'React, Next.js, Node.js, Spring Boot, AWS, Docker, MongoDB, PostgreSQL',
+        description: [
+            'Building scalable web applications for startups and businesses worldwide. Maintained 5⭐ client satisfaction by delivering production-ready solutions including:',
+            '- AI-powered platforms with AWS infrastructure and third-party API integrations',
+            '- Secure backend systems with authentication, webhooks, and real-time tracking',
+            '- Full-stack applications from frontend to cloud deployment with CI/CD pipelines',
+        ],
+        image_path: '/icons/fiverr-icon.png'
     },
 ]
