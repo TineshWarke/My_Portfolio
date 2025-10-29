@@ -3,13 +3,14 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Tiny5';
-  src: url('../public/fonts/Tiny5/Tiny5-Regular.ttf') format('truetype');
+  font-family: "Tiny5";
+  src: url("../public/fonts/Tiny5/Tiny5-Regular.ttf") format("truetype");
 }
 
 @font-face {
-  font-family: 'Sofadi One';
-  src: url('../public/fonts/Sofadi_One/SofadiOne-Regular.ttf') format('truetype');
+  font-family: "Sofadi One";
+  src: url("../public/fonts/Sofadi_One/SofadiOne-Regular.ttf")
+    format("truetype");
 }
 
 :root {
@@ -25,4 +26,18 @@
 body {
   /* color: rgb(var(--foreground-rgb)); */
   user-select: none;
+  overflow-x: hidden !important;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-x: hidden !important;
+  }
+
+  * {
+    max-width: 100vw !important;
+    box-sizing: border-box;
+  }
 }

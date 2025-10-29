@@ -70,7 +70,7 @@ const Header = () => {
   };
 
   return (
-    <div>
+    <div className="relative w-full overflow-x-clip">
       <div
         className="w-[90%] max-w-[360px] h-[250px] sm:h-[310px] glass rounded-box absolute left-2 top-40 p-5 cursor-pointer transition-opacity duration-500 ease-in-out opacity-0 sm:opacity-0 md:opacity-50 lg:opacity-75 xl:opacity-100"
         style={{
