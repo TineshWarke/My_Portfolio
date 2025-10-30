@@ -12,7 +12,7 @@ const Experience = () => {
       id="education"
     >
       <h1 className="mb-5 ml-4 text-2xl text-center lg:text-left font-bold">
-        Experience
+        Work Experience
       </h1>
       <motion.div
         variants={stagger}
