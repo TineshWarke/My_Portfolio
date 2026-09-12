@@ -9,7 +9,7 @@ const Experience = () => {
   return (
     <div
       className="flex-grow bg-transparent max-w-[1200px] pt-24 m-auto rounded-box"
-      id="education"
+      id="experience"
     >
       <h1 className="mb-5 ml-4 text-2xl text-center lg:text-left font-bold">
         Work Experience
@@ -18,6 +18,7 @@ const Experience = () => {
         variants={stagger}
         initial="initial"
         whileInView="animate"
+        className="space-y-6"
       >
         {experience.map((exp, index) => (
           <motion.div

@@ -54,6 +54,7 @@ const Navbar = () => {
                             className="menu glass menu-sm dropdown-content rounded-box z-[1] mt-3 w-auto p-2 shadow">
                             <li className='font-bold' onClick={() => handleScroll("home")}><a>About </a></li>
                             <li className='font-bold' onClick={() => handleScroll("education")}><a>Education </a></li>
+                            <li className='font-bold' onClick={() => handleScroll("experience")}><a>Experience </a></li>
                             <li className='font-bold' onClick={() => handleScroll("strengths")}><a>Strengths </a></li>
                             <li className='font-bold' onClick={() => handleScroll("resume")}><a>Resume </a></li>
                             <li className='font-bold' onClick={() => handleScroll("projects")}><a>Projects </a></li>
@@ -72,6 +73,7 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1">
                         <li className='0 font-bold' onClick={() => handleScroll("home")}><a>About </a></li>
                         <li className='font-bold' onClick={() => handleScroll("education")}><a>Education </a></li>
+                        <li className='font-bold' onClick={() => handleScroll("experience")}><a>Experience </a></li>
                         <li className='font-bold' onClick={() => handleScroll("strengths")}><a>Strengths </a></li>
                         <li className='font-bold' onClick={() => handleScroll("resume")}><a>Resume </a></li>
                         <li className='font-bold' onClick={() => handleScroll("projects")}><a>Projects </a></li>
