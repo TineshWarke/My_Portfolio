@@ -12,7 +12,6 @@ import {
   MotionValue,
   useMotionValue,
   useScroll,
-  useSpring,
   useTransform,
 } from "framer-motion";
 import { contacts } from "../data";
@@ -29,8 +28,6 @@ const cursorTransition = {
   title: { type: "spring", damping: 8, stiffness: 80 },
   subtitle: { type: "spring", damping: 10, stiffness: 90 },
 } as const;
-
-const followSpring = { stiffness: 220, damping: 28, mass: 0.5 };
 
 const ENTER_DELAY = 70;
 const LEAVE_DELAY = 90;
@@ -95,10 +92,8 @@ FloatingCard.displayName = "FloatingCard";
 
 const Header = () => {
   const [cursorMode, setCursorMode] = useState<CursorMode>("off");
-  const pointerX = useMotionValue(0);
-  const pointerY = useMotionValue(0);
-  const cursorX = useSpring(pointerX, followSpring);
-  const cursorY = useSpring(pointerY, followSpring);
+  const cursorX = useMotionValue(0);
+  const cursorY = useMotionValue(0);
   const { scrollY } = useScroll();
   const timer = useRef<ReturnType<typeof setTimeout>>();
 
@@ -106,10 +101,10 @@ const Header = () => {
 
   const track = useCallback(
     (event: PointerEvent) => {
-      pointerX.set(event.clientX);
-      pointerY.set(event.clientY);
+      cursorX.set(event.clientX);
+      cursorY.set(event.clientY);
     },
-    [pointerX, pointerY]
+    [cursorX, cursorY]
   );
 
   const schedule = (mode: CursorMode, delay: number) => {
@@ -119,10 +114,6 @@ const Header = () => {
 
   const hover = (mode: CursorMode) => (event: PointerEvent) => {
     if (event.pointerType !== "mouse") return;
-    if (cursorMode === "off") {
-      cursorX.jump(event.clientX);
-      cursorY.jump(event.clientY);
-    }
     track(event);
     schedule(mode, ENTER_DELAY);
   };
