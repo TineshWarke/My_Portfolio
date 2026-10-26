@@ -1,32 +1,42 @@
-import React, { FunctionComponent } from 'react'
-import { Category } from '../type'
+import { memo } from "react";
+import { Category } from "../type";
 
-export const NavItem: FunctionComponent<{ value: Category | 'all', filterCategory: Function, active: string }> = ({
-    value, filterCategory, active
-}) => {
-    let className = 'cursor-pointer hover:text-accent dark:hover:text-green-500 capitalize'
-    if (active === value)
-        className += ' text-accent dark:text-green-500'
-    return (
-        <li className={className} onClick={() => filterCategory(value)}>
-            {value}
-        </li>
-    )
-}
+export type CategoryFilter = Category | "all";
 
-const ProjectsNavbar: FunctionComponent<{ filterCategory: Function, active: string }> = (props) => {
-    return (
-        <div className='flex space-x-3 px-2 py-2 overflow-x-auto list-none z-20 dark:text-base-100'>
-            <NavItem value='all' {...props} />
-            <NavItem value='Java' {...props} />
-            <NavItem value='Python' {...props} />
-            <NavItem value='Express' {...props} />
-            <NavItem value='React' {...props} />
-            <NavItem value='Next.js' {...props} />
-            <NavItem value='MySQL' {...props} />
-            <NavItem value='MongoDB' {...props} />
-        </div>
-    )
-}
+const categories: CategoryFilter[] = [
+  "all",
+  "Java",
+  "Python",
+  "Express",
+  "React",
+  "Next.js",
+  "MySQL",
+  "MongoDB",
+];
 
-export default ProjectsNavbar
+const ProjectsNavbar = ({
+  active,
+  onSelect,
+}: {
+  active: CategoryFilter;
+  onSelect: (category: CategoryFilter) => void;
+}) => (
+  <ul className="z-20 flex list-none space-x-3 overflow-x-auto px-2 py-2">
+    {categories.map((category) => (
+      <li key={category}>
+        <button
+          type="button"
+          aria-pressed={active === category}
+          onClick={() => onSelect(category)}
+          className={`capitalize transition-colors hover:text-accent ${
+            active === category ? "text-accent" : ""
+          }`}
+        >
+          {category}
+        </button>
+      </li>
+    ))}
+  </ul>
+);
+
+export default memo(ProjectsNavbar);

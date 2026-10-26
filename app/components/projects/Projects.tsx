@@ -1,109 +1,100 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { projects as projectData } from '../data'
-import ProjectCard from './ProjectCard'
-import { motion } from 'framer-motion'
-import { fadeInUP, stagger } from '../animations'
-import ProjectsNavbar from './ProjectsNavbar'
-import { Category } from '../type'
+"use client";
+import { useCallback, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import { projects } from "../data";
+import { fadeInUP, stagger } from "../animations";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { scrollToSection } from "../../lib/scroll";
+import ProjectCard from "./ProjectCard";
+import ProjectsNavbar, { CategoryFilter } from "./ProjectsNavbar";
 
 const Projects = () => {
-  const [projects, setProjects] = useState(projectData)
-  const [active, setActive] = useState('all')
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
-    useEffect(() => {
-        const handleResize = () => {
-            setIsLargeScreen(window.innerWidth >= 768);
-        };
-        handleResize();
+  const [active, setActive] = useState<CategoryFilter>("all");
+  const [requestedPage, setRequestedPage] = useState(1);
+  const isLargeScreen = useMediaQuery("(min-width: 768px)");
+  const perPage = isLargeScreen ? 6 : 3;
 
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
+  const filtered = useMemo(
+    () =>
+      active === "all"
+        ? projects
+        : projects.filter((project) => project.category.includes(active)),
+    [active]
+  );
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const projectsPerPage = isLargeScreen ? 6 : 3
+  const totalPages = Math.ceil(filtered.length / perPage);
+  const currentPage = Math.min(requestedPage, totalPages);
+  const visible = filtered.slice(
+    (currentPage - 1) * perPage,
+    currentPage * perPage
+  );
 
-  const totalPages = Math.ceil(projects.length / projectsPerPage)
+  const selectCategory = useCallback((category: CategoryFilter) => {
+    setActive(category);
+    setRequestedPage(1);
+  }, []);
 
-  const indexOfLastProject = currentPage * projectsPerPage
-  const indexOfFirstProject = indexOfLastProject - projectsPerPage
-  const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject)
-
-  const filterCategory = (category: Category | 'all') => {
-    if (category === 'all') {
-      setProjects(projectData)
-      setActive(category)
-    } else {
-      const newData = projectData.filter((project) => project.category.includes(category))
-      setProjects(newData)
-      setActive(category)
-    }
-    setCurrentPage(1)
-  }
-
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber)
-  }
-
-  const handleScroll = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
+  const selectPage = (page: number) => {
+    setRequestedPage(page);
+    scrollToSection("projects");
   };
 
   return (
-    <div className="max-w-[1250px] mx-auto py-16 px-4" id='projects'>
-      <motion.div whileHover={{ scale: 1.15 }} whileTap={{ scale: 0.8 }} className='w-fit h-fit mx-auto mt-7'>
-        <button className='btn glass bg-base-300/50 dark:bg-transparent text-xl dark:bg-black dark:btn-primary dark:text-white border-solid dark:border-white'>
+    <section id="projects" className="mx-auto max-w-[1250px] px-4 py-16">
+      <motion.div
+        whileHover={{ scale: 1.15 }}
+        whileTap={{ scale: 0.8 }}
+        className="mx-auto mt-7 h-fit w-fit"
+      >
+        <h2 className="btn glass border-solid bg-base-300/50 text-xl">
           Projects
-        </button>
+        </h2>
       </motion.div>
 
       <div className="mt-4">
-        <ProjectsNavbar filterCategory={filterCategory} active={active} />
+        <ProjectsNavbar active={active} onSelect={selectCategory} />
       </div>
 
       <motion.div
-        className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 my-3'
+        key={`${active}-${currentPage}`}
+        className="my-3 grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3"
         variants={stagger}
-        initial='initial'
-        animate='animate'
+        initial="initial"
+        animate="animate"
       >
-        {currentProjects.map(project => (
-          <motion.div className='col-span-1 p-2' key={project.name} variants={fadeInUP}>
+        {visible.map((project) => (
+          <motion.div
+            key={project.name}
+            className="col-span-1 p-2"
+            variants={fadeInUP}
+          >
             <ProjectCard project={project} />
           </motion.div>
         ))}
       </motion.div>
 
       {totalPages > 1 && (
-        <div className="flex justify-center mt-6 mb-1">
-          <ul className="flex space-x-2">
-            {[...Array(totalPages)].map((_, index) => (
-              <li key={index}>
+        <ul className="mb-1 mt-6 flex justify-center space-x-2">
+          {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+            (page) => (
+              <li key={page}>
                 <button
-                  onClick={() => { handlePageChange(index + 1), handleScroll("projects") }}
-                  className={`px-3 py-1 rounded ${currentPage === index + 1
-                      ? 'bg-accent'
-                      : 'bg-base-100 '
-                    }`}
+                  type="button"
+                  aria-current={currentPage === page ? "page" : undefined}
+                  onClick={() => selectPage(page)}
+                  className={`rounded px-3 py-1 ${
+                    currentPage === page ? "bg-accent" : "bg-base-100"
+                  }`}
                 >
-                  {index + 1}
+                  {page}
                 </button>
               </li>
-            ))}
-          </ul>
-        </div>
+            )
+          )}
+        </ul>
       )}
-    </div>
-  )
-}
+    </section>
+  );
+};
 
-export default Projects
+export default Projects;

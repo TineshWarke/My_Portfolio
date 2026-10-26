@@ -1,38 +1,31 @@
-import React, { FunctionComponent } from "react";
+import { memo } from "react";
 import { IExperience } from "../type";
-import Image from "next/image";
+import SurfaceCard from "../ui/SurfaceCard";
 
-const ExperienceCard: FunctionComponent<{ experience: IExperience }> = ({
-  experience: { role, description, tech_stack, year, image_path },
+const ExperienceCard = ({
+  experience: { role, description, year, image_path },
+}: {
+  experience: IExperience;
 }) => {
+  const lastIndex = description.length - 1;
+
   return (
-    <div className="p-3 m-2 hover:shadow-[0px_0px_20px_1px_rgba(255,187,118,0.50)] bg-base-300/50 dark:bg-transparent hover:border-2 hover:border-solid hover:border-white flex items-center space-x-4 glass min-h-32 rounded-box h-auto hover:-translate-y-2 cursor-pointer duration-200">
-      <div className="flex-shrink-0">
-        <Image
-          height={60}
-          width={60}
-          className="my-auto lg:ml-6 lg:mr-4 bg-transparent object-cover"
-          src={image_path}
-          alt={"institution logo"}
-        />
-      </div>
-      <div className="flex-grow max-w-full pr-3">
-        <h4 className="text-lg md:text-xl font-bold">{role}</h4>
-        {description.map((desc, index) => (
-          <div key={index}>
-            {index !== description.length - 1 ? (
-              <h4 className="text-sm md:text-base text-justify">{desc}</h4>
-            ) : (
-              <h4 className="text-sm md:text-base flex justify-between">
-                <span>{desc}</span>
-                <span>{year}</span>
-              </h4>
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+    <SurfaceCard icon={image_path} alt={`${role} logo`}>
+      <h4 className="text-lg font-bold md:text-xl">{role}</h4>
+      {description.map((line, index) =>
+        index === lastIndex ? (
+          <h4 key={line} className="flex justify-between text-sm md:text-base">
+            <span>{line}</span>
+            <span>{year}</span>
+          </h4>
+        ) : (
+          <h4 key={line} className="text-justify text-sm md:text-base">
+            {line}
+          </h4>
+        )
+      )}
+    </SurfaceCard>
   );
 };
 
-export default ExperienceCard;
+export default memo(ExperienceCard);

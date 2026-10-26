@@ -1,32 +1,35 @@
-'use client'
-import React from 'react';
-import { motion } from 'framer-motion';
-import { services } from '../data';
-import ServiceCard from './ServiceCard';
-import { fadeInUP, stagger } from '../animations';
+"use client";
+import { motion } from "framer-motion";
+import { services } from "../data";
+import { fadeInUP, revealOnce, stagger } from "../animations";
+import ServiceCard from "./ServiceCard";
 
-const Services = () => {
-    return (
-        <div className='flex-grow bg-transparent max-w-[1200px] pt-24 m-auto dark:text-white rounded-box' id='strengths'>
-            <h1 className="mb-5 ml-4 text-2xl text-center lg:text-left dark:text-green-500 font-bold">What Can I Do</h1>
-            <motion.div
-                className='grid grid-cols-1 sm:grid-cols-2 gap-6'
-                variants={stagger}
-                initial='initial'
-                whileInView='animate'
-            >
-                {services.map((service, index) => (
-                    <motion.div
-                        key={index}
-                        variants={fadeInUP}
-                        className='rounded-box bg-transparent'
-                    >
-                        <ServiceCard service={service} />
-                    </motion.div>
-                ))}
-            </motion.div>
-        </div>
-    );
-};
+const Services = () => (
+  <section
+    id="strengths"
+    className="m-auto max-w-[1200px] flex-grow rounded-box pt-24"
+  >
+    <h2 className="mb-5 ml-4 text-center text-2xl font-bold lg:text-left">
+      What Can I Do
+    </h2>
+    <motion.div
+      className="grid grid-cols-1 gap-6 sm:grid-cols-2"
+      variants={stagger}
+      initial="initial"
+      whileInView="animate"
+      viewport={revealOnce}
+    >
+      {services.map((service) => (
+        <motion.div
+          key={service.title}
+          variants={fadeInUP}
+          className="rounded-box"
+        >
+          <ServiceCard service={service} />
+        </motion.div>
+      ))}
+    </motion.div>
+  </section>
+);
 
 export default Services;

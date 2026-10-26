@@ -1,115 +1,158 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import {
+  memo,
+  PointerEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import {
+  motion,
+  MotionValue,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import { contacts } from "../data";
 import Contacts from "./Contacts";
-import { debounce } from "lodash";
+import BackgroundVideo from "../ui/BackgroundVideo";
+
+const CURSOR_SIZE = 120;
+
+const cursorScale = { off: 0, title: 1, subtitle: 50 / CURSOR_SIZE } as const;
+type CursorMode = keyof typeof cursorScale;
+
+const cursorTransition = {
+  off: { duration: 0.2 },
+  title: { type: "spring", damping: 8, stiffness: 80 },
+  subtitle: { type: "spring", damping: 10, stiffness: 90 },
+} as const;
+
+const followSpring = { stiffness: 220, damping: 28, mass: 0.5 };
+
+const ENTER_DELAY = 70;
+const LEAVE_DELAY = 90;
+
+const floatingCards = [
+  {
+    video: "/videos/game-bg-9.mp4",
+    rotate: 16,
+    box: "left-2 top-40 h-[250px] sm:h-[310px]",
+    focus: "object-bottom",
+  },
+  {
+    video: "/videos/game-bg-6.mp4",
+    rotate: -14,
+    box: "right-2 top-40 h-[250px] sm:top-60 sm:h-[310px]",
+    focus: "object-bottom",
+  },
+  {
+    video: "/videos/game-bg-7.mp4",
+    rotate: 20,
+    box: "-right-8 top-[600px] h-[200px] sm:top-[700px] sm:h-[250px] md:top-[800px] md:h-[310px] lg:top-[1150px]",
+    focus: "object-center",
+  },
+  {
+    video: "/videos/game-bg-8.mp4",
+    rotate: -25,
+    box: "-left-24 top-[500px] h-[200px] sm:top-[600px] sm:h-[250px] md:top-[700px] md:h-[310px] lg:top-[1050px]",
+    focus: "object-center",
+  },
+];
+
+const FloatingCard = memo(
+  ({
+    scrollY,
+    video,
+    rotate,
+    box,
+    focus,
+  }: {
+    scrollY: MotionValue<number>;
+    video: string;
+    rotate: number;
+    box: string;
+    focus: string;
+  }) => {
+    const y = useTransform(scrollY, (value) => value * -1.2);
+
+    return (
+      <motion.div
+        aria-hidden="true"
+        style={{ y, rotate }}
+        className={`glass absolute hidden w-[90%] max-w-[360px] cursor-pointer rounded-box p-5 will-change-transform md:block md:opacity-50 lg:opacity-75 xl:opacity-100 ${box}`}
+      >
+        <div className="relative h-full w-full overflow-hidden rounded-box">
+          <BackgroundVideo src={video} className={focus} />
+        </div>
+      </motion.div>
+    );
+  }
+);
+FloatingCard.displayName = "FloatingCard";
 
 const Header = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [scrollY, setScrollY] = useState(0);
-  const [cursorVarient, setCursorVarient] = useState("default");
+  const [cursorMode, setCursorMode] = useState<CursorMode>("off");
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const cursorX = useSpring(pointerX, followSpring);
+  const cursorY = useSpring(pointerY, followSpring);
+  const { scrollY } = useScroll();
+  const timer = useRef<ReturnType<typeof setTimeout>>();
 
-  useEffect(() => {
-    const mouseMove = debounce((e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
-    }, 10);
+  useEffect(() => () => clearTimeout(timer.current), []);
 
-    window.addEventListener("mousemove", mouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", mouseMove);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  const varients = {
-    default: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
+  const track = useCallback(
+    (event: PointerEvent) => {
+      pointerX.set(event.clientX);
+      pointerY.set(event.clientY);
     },
-    animate: {
-      height: 120,
-      width: 120,
-      x: mousePosition.x - 60,
-      y: mousePosition.y - 60,
-      backgroundColor: "white",
-      mixBlendMode: "difference" as "difference",
-      transition: {
-        duration: 0.3,
-        type: "spring",
-        damping: 8,
-        stiffness: 80,
-      },
-    },
-    animatesmall: {
-      height: 50,
-      width: 50,
-      x: mousePosition.x - 25,
-      y: mousePosition.y - 25,
-      backgroundColor: "white",
-      mixBlendMode: "difference" as "difference",
-      transition: {
-        duration: 0.3,
-        type: "spring",
-        damping: 10,
-        stiffness: 90,
-      },
-    },
+    [pointerX, pointerY]
+  );
+
+  const schedule = (mode: CursorMode, delay: number) => {
+    clearTimeout(timer.current);
+    timer.current = setTimeout(() => setCursorMode(mode), delay);
   };
+
+  const hover = (mode: CursorMode) => (event: PointerEvent) => {
+    if (event.pointerType !== "mouse") return;
+    if (cursorMode === "off") {
+      cursorX.jump(event.clientX);
+      cursorY.jump(event.clientY);
+    }
+    track(event);
+    schedule(mode, ENTER_DELAY);
+  };
+
+  const leave = () => schedule("off", LEAVE_DELAY);
 
   return (
     <div className="relative w-full overflow-x-clip">
-      <div
-        className="w-[90%] max-w-[360px] h-[250px] sm:h-[310px] glass rounded-box absolute left-2 top-40 p-5 cursor-pointer transition-opacity duration-500 ease-in-out opacity-0 sm:opacity-0 md:opacity-50 lg:opacity-75 xl:opacity-100"
-        style={{
-          transform: `translateY(${-scrollY * 1.2}px) rotate(16deg)`,
-        }}
-      >
-        <div className="bg-game-bg-9 w-full h-full bg-cover bg-bottom rounded-box" />
-      </div>
-
-      <div
-        className="w-[90%] max-w-[360px] h-[250px] sm:h-[310px] glass rounded-box absolute right-2 top-40 sm:top-60 p-5 cursor-pointer transition-opacity duration-500 ease-in-out opacity-0 sm:opacity-0 md:opacity-50 lg:opacity-75 xl:opacity-100"
-        style={{
-          transform: `translateY(${-scrollY * 1.2}px) rotate(-14deg)`,
-        }}
-      >
-        <div className="bg-game-bg-6 w-full h-full bg-cover bg-bottom rounded-box" />
-      </div>
-
-      <div
-        className="w-[90%] max-w-[360px] h-[200px] sm:h-[250px] md:h-[310px] glass rounded-box absolute  -right-8 top-[600px] sm:top-[700px] md:top-[800px] lg:top-[1150px] p-5 cursor-pointer transition-opacity duration-500 ease-in-out opacity-0 sm:opacity-0 md:opacity-50 lg:opacity-75 xl:opacity-100"
-        style={{
-          transform: `translateY(${-scrollY * 1.2}px) rotate(20deg)`,
-        }}
-      >
-        <div className="bg-game-bg-7 w-full h-full bg-cover bg-center rounded-box" />
-      </div>
-
-      <div
-        className="w-[90%] max-w-[360px] h-[200px] sm:h-[250px] md:h-[310px] glass rounded-box absolute -left-24 top-[500px] sm:top-[600px] md:top-[700px] lg:top-[1050px] p-5 cursor-pointer transition-opacity duration-500 ease-in-out opacity-0 sm:opacity-0 md:opacity-50 lg:opacity-75 xl:opacity-100"
-        style={{
-          transform: `translateY(${-scrollY * 1.2}px) rotate(-25deg)`,
-        }}
-      >
-        <div className="bg-game-bg-8 w-full h-full bg-cover bg-center rounded-box" />
-      </div>
+      {floatingCards.map((card) => (
+        <FloatingCard key={card.video} scrollY={scrollY} {...card} />
+      ))}
 
       <div className="hero pb-8">
-        <div className="hero-content text-neutral-content text-center w-full">
-          <div className="w-full">
+        <div className="hero-content w-full text-center text-neutral-content">
+          <motion.div
+            aria-hidden="true"
+            initial={{ scale: 0 }}
+            animate={{ scale: cursorScale[cursorMode] }}
+            transition={cursorTransition[cursorMode]}
+            style={{
+              x: cursorX,
+              y: cursorY,
+              width: CURSOR_SIZE,
+              height: CURSOR_SIZE,
+              marginLeft: -CURSOR_SIZE / 2,
+              marginTop: -CURSOR_SIZE / 2,
+            }}
+            className="pointer-events-none fixed left-0 top-0 rounded-full bg-white opacity-70 mix-blend-difference"
+          />
+          <div className="w-full" onPointerMove={track}>
             <motion.div
               initial={{ opacity: 0, scale: 0 }}
               whileInView={{
@@ -122,45 +165,39 @@ const Header = () => {
                   stiffness: 100,
                 },
               }}
-              className="w-fit m-auto cursor-none"
+              viewport={{ once: true }}
+              className="m-auto w-fit cursor-none"
             >
-              <motion.div
-                className="bg-transparent opacity-70 h-0 w-0 rounded-full fixed top-0 left-0 pointer-events-none"
-                variants={varients}
-                animate={cursorVarient}
-              />
               <h1
-                className="font-Sofadi-One lg:text-9xl text-7xl font-bold"
-                onMouseEnter={() => setCursorVarient("animate")}
-                onMouseLeave={() => setCursorVarient("default")}
+                className="font-Sofadi-One text-7xl font-bold lg:text-9xl"
+                onPointerEnter={hover("title")}
+                onPointerLeave={leave}
               >
                 Tinesh Warake
               </h1>
             </motion.div>
-            <div className="w-fit m-auto cursor-none">
-              <h1
-                className="font-Sofadi-One text-2xl sm:text-4xl font-medium tracking-widest"
-                onMouseEnter={() => setCursorVarient("animatesmall")}
-                onMouseLeave={() => setCursorVarient("default")}
+            <div className="m-auto w-fit cursor-none">
+              <p
+                className="font-Sofadi-One text-2xl font-medium tracking-widest sm:text-4xl"
+                onPointerEnter={hover("subtitle")}
+                onPointerLeave={leave}
               >
                 Coding the Future: Full-Stack
-              </h1>
+              </p>
             </div>
-            <div className="w-fit mb-8 m-auto cursor-none">
-              <h1
-                className="font-Sofadi-One mb-5 text-2xl sm:text-4xl font-medium tracking-widest"
-                onMouseEnter={() => setCursorVarient("animatesmall")}
-                onMouseLeave={() => setCursorVarient("default")}
+            <div className="m-auto mb-8 w-fit cursor-none">
+              <p
+                className="mb-5 font-Sofadi-One text-2xl font-medium tracking-widest sm:text-4xl"
+                onPointerEnter={hover("subtitle")}
+                onPointerLeave={leave}
               >
                 Developer at Work
-              </h1>
+              </p>
             </div>
 
-            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 md:gap-1 px-4 max-w-4xl mx-auto">
-              {contacts.map((contact, index) => (
-                <div key={index}>
-                  <Contacts contact={contact} />
-                </div>
+            <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-3 px-4 sm:gap-4 md:gap-1">
+              {contacts.map((contact) => (
+                <Contacts key={contact.name} contact={contact} />
               ))}
             </div>
           </div>

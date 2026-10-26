@@ -83,11 +83,6 @@ export const services: IService[] = [
       "Implementing deep learning models using <b>Python</b>, <b>TensorFlow</b>, <b>Keras</b>, and <b>OpenCV</b>.",
     icon: "/icons/ml.png",
   },
-  // {
-  //     title: 'API Development',
-  //     about: 'I can delelop robust REST API using <b>Node.js </b>',
-  //     icon: '/icons/api.png'
-  // },
 ];
 
 export const skills: ISkills[] = [

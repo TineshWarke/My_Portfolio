@@ -1,129 +1,180 @@
-'use client';
-import React, { useState, useEffect, useRef } from 'react';
-import { ISkills } from '../type';
-import { motion } from 'framer-motion';
-import CircularBar from './CircularProgress';
+"use client";
+import {
+  memo,
+  PointerEvent,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+} from "react";
+import { ISkills } from "../type";
+import BackgroundVideo from "../ui/BackgroundVideo";
+import CircularBar from "./CircularProgress";
 
-const SkillSet: React.FC<{ skills: ISkills[] }> = ({ skills }) => {
-  const [positions, setPositions] = useState<{ left: number; top: number }[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const radius = 50;
-  const padding = 0;
-  const bottomPadding = 28;
-  const minMargin = 30;
-  const moveDistance = 50;
+interface Point {
+  x: number;
+  y: number;
+}
 
-  const getRandomPosition = () => {
-    const maxX = 1200 - radius * 2 - padding - bottomPadding;
-    const maxY = 550 - radius * 2 - padding - bottomPadding;
-    const x = Math.random() * maxX + padding;
-    const y = Math.random() * maxY + padding;
-    return { left: x, top: y };
-  };
+const BUBBLE = 128;
+const MIN_DISTANCE = BUBBLE + 8;
+const ATTEMPTS = 300;
+const RETRIES = 40;
+const PUSH_RANGE = 120;
+const PUSH_DISTANCE = 50;
 
-  const checkCollision = (newPos: { left: number; top: number }, existingPositions: { left: number; top: number }[]) => {
-    return existingPositions.some((pos) => {
-      const dx = newPos.left - pos.left;
-      const dy = newPos.top - pos.top;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      return distance < radius * 2 + minMargin;
-    });
-  };
+const distance = (a: Point, b: Point) => Math.hypot(a.x - b.x, a.y - b.y);
 
-  const generateRandomPositions = () => {
-    const newPositions: { left: number; top: number }[] = [];
-    while (newPositions.length < skills.length) {
-      const newPos = getRandomPosition();
+const clamp = (value: number, max: number) => Math.max(0, Math.min(value, max));
 
-      if (!checkCollision(newPos, newPositions)) {
-        newPositions.push(newPos);
+const isFree = (point: Point, others: Point[], ignore = -1) =>
+  others.every(
+    (other, index) => index === ignore || distance(point, other) >= MIN_DISTANCE
+  );
+
+const scatterOnce = (count: number, maxX: number, maxY: number) => {
+  const placed: Point[] = [];
+  let packed = true;
+
+  while (placed.length < count) {
+    let best: Point = { x: 0, y: 0 };
+    let bestGap = -1;
+
+    for (let i = 0; i < ATTEMPTS && bestGap < MIN_DISTANCE; i++) {
+      const candidate = { x: Math.random() * maxX, y: Math.random() * maxY };
+      const gap = placed.reduce(
+        (min, other) => Math.min(min, distance(candidate, other)),
+        Infinity
+      );
+      if (gap > bestGap) {
+        best = candidate;
+        bestGap = gap;
       }
     }
-    setPositions(newPositions);
-  };
 
-  // const generateRandomPositions = () => {
-  //   const newPositions: { left: number; top: number }[] = [];
-  //   let attempts = 0; // Track the number of attempts
-  //   while (newPositions.length < skills.length && attempts < 1000) { // Limit to 1000 attempts
-  //     const newPos = getRandomPosition();
+    packed &&= bestGap >= MIN_DISTANCE;
+    placed.push(best);
+  }
 
-  //     if (!checkCollision(newPos, newPositions)) {
-  //       newPositions.push(newPos);
-  //     }
-  //     attempts++;
-  //   }
-  //   setPositions(newPositions);
-  // };
+  return { placed, packed };
+};
 
-  useEffect(() => {
-    generateRandomPositions();
-  }, [skills]);
+const scatter = (count: number, width: number, height: number): Point[] => {
+  const maxX = Math.max(0, width - BUBBLE);
+  const maxY = Math.max(0, height - BUBBLE);
+  let result = scatterOnce(count, maxX, maxY);
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    const containerRect = containerRef.current?.getBoundingClientRect();
-    if (!containerRect) return;
+  for (let retry = 0; retry < RETRIES && !result.packed; retry++) {
+    result = scatterOnce(count, maxX, maxY);
+  }
 
-    const mouseX = e.clientX - containerRect.left;
-    const mouseY = e.clientY - containerRect.top;
+  return result.placed;
+};
 
-    const updatedPositions = positions.map((pos, index) => {
-      const dx = pos.left + radius - mouseX;
-      const dy = pos.top + radius - mouseY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
+const SkillSet = ({ skills }: { skills: ISkills[] }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const nodes = useRef<(HTMLDivElement | null)[]>([]);
+  const positions = useRef<Point[]>([]);
+  const pointer = useRef<Point>({ x: 0, y: 0 });
+  const frame = useRef(0);
 
-      if (distance < 120) {
-        const angle = Math.atan2(dy, dx);
-        let newX = pos.left + Math.cos(angle) * moveDistance;
-        let newY = pos.top + Math.sin(angle) * moveDistance;
+  const paint = useCallback((index: number) => {
+    const node = nodes.current[index];
+    const { x, y } = positions.current[index];
+    if (node) node.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+  }, []);
 
-        newX = Math.max(padding, Math.min(newX, 1200 - radius * 2 - bottomPadding));
-        newY = Math.max(padding, Math.min(newY, 550 - radius * 2 - bottomPadding));
+  const shuffle = useCallback(() => {
+    const container = containerRef.current;
+    if (!container) return;
+    positions.current = scatter(
+      skills.length,
+      container.clientWidth,
+      container.clientHeight
+    );
+    positions.current.forEach((_, index) => paint(index));
+  }, [skills.length, paint]);
 
-        if (!checkCollision({ left: newX, top: newY }, positions.filter((_, i) => i !== index))) {
-          return { left: newX, top: newY };
-        }
-      }
-      return pos;
+  useLayoutEffect(() => {
+    const setTransition = (value: string) =>
+      nodes.current.forEach((node) => {
+        if (node) node.style.transition = value;
+      });
+
+    setTransition("none");
+    shuffle();
+    let settle = requestAnimationFrame(() => {
+      settle = requestAnimationFrame(() => setTransition(""));
     });
 
-    setPositions(updatedPositions);
+    return () => cancelAnimationFrame(settle);
+  }, [shuffle]);
+
+  useEffect(() => () => cancelAnimationFrame(frame.current), []);
+
+  const repel = useCallback(() => {
+    frame.current = 0;
+    const container = containerRef.current;
+    if (!container) return;
+
+    const rect = container.getBoundingClientRect();
+    const mouse = {
+      x: pointer.current.x - rect.left,
+      y: pointer.current.y - rect.top,
+    };
+    const maxX = container.clientWidth - BUBBLE;
+    const maxY = container.clientHeight - BUBBLE;
+    const current = positions.current;
+
+    current.forEach((position, index) => {
+      const dx = position.x + BUBBLE / 2 - mouse.x;
+      const dy = position.y + BUBBLE / 2 - mouse.y;
+      if (Math.hypot(dx, dy) >= PUSH_RANGE) return;
+
+      const angle = Math.atan2(dy, dx);
+      const next = {
+        x: clamp(position.x + Math.cos(angle) * PUSH_DISTANCE, maxX),
+        y: clamp(position.y + Math.sin(angle) * PUSH_DISTANCE, maxY),
+      };
+
+      if (isFree(next, current, index)) {
+        current[index] = next;
+        paint(index);
+      }
+    });
+  }, [paint]);
+
+  const onPointerMove = (event: PointerEvent) => {
+    if (event.pointerType !== "mouse") return;
+    pointer.current = { x: event.clientX, y: event.clientY };
+    if (!frame.current) frame.current = requestAnimationFrame(repel);
   };
 
   return (
-    <motion.div
+    <div
       ref={containerRef}
-      className="relative flex bg-center items-center justify-center bg-game-bg-10 bg-cover rounded-box"
-      style={{ width: '1200px', height: '550px', padding: `0px 0px 0px 0px` }}
-      onViewportEnter={generateRandomPositions}
-      onMouseMove={handleMouseMove}
+      onPointerMove={onPointerMove}
+      className="relative flex h-[550px] w-[1200px] items-center justify-center overflow-hidden rounded-box"
     >
-      <button className='btn glass opacity-90 text-3xl mt-2 bg-base-300/80 dark:bg-transparent dark:hover:bg-black z-30 dark:hover:text-white dark:border-black border-solid'>
+      <BackgroundVideo src="/videos/game-bg-10.mp4" />
+
+      <h2 className="btn glass z-30 mt-2 border-solid bg-base-300/80 text-3xl opacity-90">
         My Tech Stack
-      </button>
+      </h2>
 
       {skills.map((skill, index) => (
-        <motion.div
-          key={index}
-          className="absolute"
-          style={{
-            left: `${positions[index]?.left}px`,
-            top: `${positions[index]?.top}px`,
+        <div
+          key={skill.name}
+          ref={(node) => {
+            nodes.current[index] = node;
           }}
-          animate={{
-            left: positions[index]?.left,
-            top: positions[index]?.top,
-          }}
-          transition={{
-            duration: 0.4,
-            ease: 'easeInOut',
-          }}
+          className="absolute left-0 top-0 transition-transform duration-[400ms] ease-in-out will-change-transform"
         >
           <CircularBar data={skill} />
-        </motion.div>
+        </div>
       ))}
-    </motion.div>
+    </div>
   );
 };
 
-export default SkillSet;
+export default memo(SkillSet);

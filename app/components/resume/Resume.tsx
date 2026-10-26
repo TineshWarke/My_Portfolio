@@ -1,119 +1,110 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
+import Image from "next/image";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { scrollToSection } from "../../lib/scroll";
+import BackgroundVideo from "../ui/BackgroundVideo";
+
+const RESUME_PDF = "/resume/Tinesh_Warake_Resume.pdf";
+const TOTAL_PAGES = 2;
+
+const buttonClass =
+  "btn glass bg-base-300/50 text-xl border-solid";
+const pagerClass =
+  "btn glass bg-base-300/50 border-2 border-solid disabled:opacity-50";
 
 const Resume = () => {
   const [view, setView] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLargeScreen, setIsLargeScreen] = useState(false);
+  const [page, setPage] = useState(1);
+  const isLargeScreen = useMediaQuery("(min-width: 768px)");
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsLargeScreen(window.innerWidth >= 768);
-    };
-
-    handleResize();
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  const handleScroll = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-  };
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+  const toggle = (open: boolean) => {
+    setView(open);
+    setPage(1);
+    scrollToSection("resume");
   };
 
   return (
-    <div id="resume" className="pt-24">
-      <div className="max-w-[1000px] m-auto rounded-box min-h-[250px] glass p-7">
-        <div className="max-w-[944px] min-h-[194px] bg-game-bg-2 bg-cover rounded-box bg-center py-16">
+    <section id="resume" className="pt-24">
+      <div className="glass m-auto min-h-[250px] max-w-[1000px] rounded-box p-7">
+        <div className="relative min-h-[194px] max-w-[944px] overflow-hidden rounded-box py-16">
+          <BackgroundVideo src="/videos/game-bg-2.mp4" />
+
           {!view && (
-            <div className="w-fit h-fit m-auto">
+            <div className="relative m-auto h-fit w-fit">
               {isLargeScreen ? (
                 <button
-                  className="btn glass bg-base-300/50 dark:bg-transparent text-xl mt-2 dark:hover:bg-black dark:hover:text-white dark:border-black dark:hover:border-white border-solid"
-                  onClick={() => {
-                    setView(true);
-                    setCurrentPage(1);
-                    handleScroll("resume");
-                  }}
+                  type="button"
+                  className={`${buttonClass} mt-2`}
+                  onClick={() => toggle(true)}
                 >
                   Resume
                 </button>
               ) : (
-                <a href="/resume/Tinesh_Warake_Resume.pdf" download>
-                  <button className="btn glass bg-base-300/50 dark:bg-transparent text-xl mt-2 dark:hover:bg-black dark:hover:text-white dark:border-black dark:hover:border-white border-solid">
-                    Resume
-                  </button>
+                <a href={RESUME_PDF} download className={`${buttonClass} mt-2`}>
+                  Resume
                 </a>
               )}
             </div>
           )}
-          <div
-            className={`${
-              view ? "h-fit py-5" : "h-0 overflow-hidden"
-            } w-fit m-auto glass rounded-box`}
-          >
-            {/* Resume Page Display */}
-            <div
-              className="bg-resume-bg-1 bg-cover h-[998px] w-[750px] mx-5 rounded-box"
-              style={{ backgroundImage: `url(/resume/page${currentPage}.png)` }}
-            />
 
-            {/* Page Navigation */}
-            <div className="flex items-center justify-center gap-4 mt-5">
-              <button
-                className="btn glass bg-base-300/50 dark:bg-transparent dark:hover:bg-black dark:hover:text-white border-2 dark:border-black dark:hover:border-white border-solid disabled:opacity-50"
-                onClick={() => handlePageChange(1)}
-                disabled={currentPage === 1}
-              >
-                ← Prev
-              </button>
-              <span className="text-lg font-semibold">
-                Page {currentPage} of 2
-              </span>
-              <button
-                className="btn glass bg-base-300/50 dark:bg-transparent dark:hover:bg-black dark:hover:text-white border-2 dark:border-black dark:hover:border-white border-solid disabled:opacity-50"
-                onClick={() => handlePageChange(2)}
-                disabled={currentPage === 2}
-              >
-                Next →
-              </button>
-            </div>
+          {view && (
+            <div className="glass relative m-auto h-fit w-fit rounded-box py-5">
+              <div className="relative mx-5 h-[998px] w-[750px] overflow-hidden rounded-box">
+                <Image
+                  key={page}
+                  src={`/resume/page${page}.png`}
+                  alt={`Resume page ${page}`}
+                  fill
+                  sizes="750px"
+                  quality={90}
+                  className="object-cover"
+                />
+              </div>
 
-            {/* Action Buttons */}
-            <div className="grid grid-cols-2 w-fit h-fit m-auto mt-3">
-              <a href="/resume/Tinesh_Warake_Resume.pdf" download>
-                <button className="btn glass bg-base-300/50 dark:bg-transparent text-xl m-auto dark:hover:bg-black dark:hover:text-white border-2 dark:border-black dark:hover:border-white border-solid">
-                  Download
+              <div className="mt-5 flex items-center justify-center gap-4">
+                <button
+                  type="button"
+                  className={pagerClass}
+                  onClick={() => setPage(1)}
+                  disabled={page === 1}
+                >
+                  ← Prev
                 </button>
-              </a>
-              <button
-                className="btn glass bg-base-300/50 dark:bg-transparent text-xl m-auto dark:hover:bg-black dark:hover:text-white border-2 dark:border-black dark:hover:border-white border-solid"
-                onClick={() => {
-                  setView(false);
-                  setCurrentPage(1);
-                  handleScroll("resume");
-                }}
-              >
-                Close
-              </button>
+                <span className="text-lg font-semibold">
+                  Page {page} of {TOTAL_PAGES}
+                </span>
+                <button
+                  type="button"
+                  className={pagerClass}
+                  onClick={() => setPage(TOTAL_PAGES)}
+                  disabled={page === TOTAL_PAGES}
+                >
+                  Next →
+                </button>
+              </div>
+
+              <div className="m-auto mt-3 grid h-fit w-fit grid-cols-2">
+                <a
+                  href={RESUME_PDF}
+                  download
+                  className={`${buttonClass} m-auto border-2`}
+                >
+                  Download
+                </a>
+                <button
+                  type="button"
+                  className={`${buttonClass} m-auto border-2`}
+                  onClick={() => toggle(false)}
+                >
+                  Close
+                </button>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

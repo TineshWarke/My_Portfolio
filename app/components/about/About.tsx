@@ -1,47 +1,35 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import Typewriter from 'typewriter-effect';
-import { intro } from '../data';
+"use client";
+import { memo } from "react";
+import Typewriter, { TypewriterClass } from "typewriter-effect";
+import { intro } from "../data";
+import BackgroundVideo from "../ui/BackgroundVideo";
 
-const About = () => {
-    const [scrollY, setScrollY] = useState(0);
+const typewriterOptions = {
+  autoStart: true,
+  loop: true,
+  deleteSpeed: 0,
+  delay: 30,
+};
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrollY(window.scrollY);
-        };
+const type = (typewriter: TypewriterClass) => {
+  typewriter.typeString(intro).pauseFor(120000).deleteAll(0).start();
+};
 
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    return (
-        <div className="p-5 pb-0">
-            <div className='glass opacity-90 m-auto p-4 sm:p-5 md:p-7 flex flex-col max-w-full sm:max-w-[600px] md:max-w-[800px] lg:max-w-[1000px] rounded-box overflow-hidden z-0 cursor-pointer'>
-                <div className='bg-game-bg-1 bg-cover rounded-box flex-grow hover:bg-transparent h-[340px] sm:h-[500px] md:h-[500px] lg:h-[560px] overflow-scroll scrollbar-none'>
-                    <div className='bg-base-300/80 dark:bg-black/80 mx-2 sm:mx-4 md:mx-6 rounded-box p-2 my-4 sm:my-5 md:my-6 cursor-none'>
-                        <div className="text-sm sm:text-base md:text-lg dark:text-white font-Sofadi-One text-custom-96 text-justify px-2 sm:px-3 md:px-4">
-                            <Typewriter
-                                onInit={(typewriter) => {
-                                    typewriter
-                                        .typeString(intro)
-                                        .pauseFor(120000)
-                                        .deleteAll(0)
-                                        .start();
-                                }}
-                                options={{
-                                    autoStart: true,
-                                    loop: true,
-                                    deleteSpeed: 0,
-                                    delay: 30,
-                                }}
-                            />
-                        </div>
-                    </div>
-                </div>
+const About = () => (
+  <section className="p-5 pb-0">
+    <div className="glass m-auto flex max-w-full flex-col overflow-hidden z-0 cursor-pointer rounded-box p-4 opacity-90 sm:max-w-[600px] sm:p-5 md:max-w-[800px] md:p-7 lg:max-w-[1000px]">
+      <div className="relative h-[340px] flex-grow overflow-hidden rounded-box sm:h-[500px] lg:h-[560px]">
+        <BackgroundVideo src="/videos/game-bg-1.mp4" />
+        <div className="relative h-full overflow-y-scroll scrollbar-none">
+          <div className="mx-2 my-4 cursor-none rounded-box bg-base-300/80 p-2 sm:mx-4 sm:my-5 md:mx-6 md:my-6">
+            <div className="px-2 text-justify font-Sofadi-One text-sm sm:px-3 sm:text-base md:px-4 md:text-lg">
+              <Typewriter onInit={type} options={typewriterOptions} />
             </div>
+          </div>
         </div>
-    )
-}
+      </div>
+    </div>
+  </section>
+);
 
-export default About;
+export default memo(About);

@@ -1,42 +1,31 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
 import { experience } from "../data";
-import { fadeInUP, stagger } from "../animations";
+import { fadeInUP, revealOnce, stagger } from "../animations";
 import ExperienceCard from "./ExperienceCard";
 
-const Experience = () => {
-  return (
-    <div
-      className="flex-grow bg-transparent max-w-[1200px] pt-24 m-auto rounded-box"
-      id="experience"
+const Experience = () => (
+  <section
+    id="experience"
+    className="m-auto max-w-[1200px] flex-grow rounded-box pt-24"
+  >
+    <h2 className="mb-5 ml-4 text-center text-2xl font-bold lg:text-left">
+      Work Experience
+    </h2>
+    <motion.div
+      className="space-y-6"
+      variants={stagger}
+      initial="initial"
+      whileInView="animate"
+      viewport={revealOnce}
     >
-      <h1 className="mb-5 ml-4 text-2xl text-center lg:text-left font-bold">
-        Work Experience
-      </h1>
-      <motion.div
-        variants={stagger}
-        initial="initial"
-        whileInView="animate"
-        className="space-y-6"
-      >
-        {experience.map((exp, index) => (
-          <motion.div
-            key={index}
-            variants={fadeInUP}
-            className={`rounded-box bg-transparent 
-                            ${
-                              index === 2
-                                ? "sm:col-span-2 flex justify-center"
-                                : ""
-                            }`}
-          >
-            <ExperienceCard experience={exp} />
-          </motion.div>
-        ))}
-      </motion.div>
-    </div>
-  );
-};
+      {experience.map((item) => (
+        <motion.div key={item.role} variants={fadeInUP} className="rounded-box">
+          <ExperienceCard experience={item} />
+        </motion.div>
+      ))}
+    </motion.div>
+  </section>
+);
 
 export default Experience;

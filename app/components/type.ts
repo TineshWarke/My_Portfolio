@@ -13,7 +13,6 @@ export interface IService {
 export interface ISkills {
   name: string;
   level: string;
-  // Icon: IconType
   icon: string;
 }
 
@@ -43,6 +42,7 @@ export interface IEducation {
   year: string;
   image_path: string;
 }
+
 export interface IExperience {
   role: string;
   tech_stack: string;

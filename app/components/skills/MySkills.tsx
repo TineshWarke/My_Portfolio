@@ -1,53 +1,34 @@
-'use client'
-import React, { useEffect, useState } from 'react'
-import { skills } from '../data'
-import Bar from './Bar'
-import SkillSet from './SkillSet'
-import CircularBar from './CircularProgress'
+"use client";
+import { skills } from "../data";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import SkillSet from "./SkillSet";
+import CircularBar from "./CircularProgress";
 
 const MySkills = () => {
-    const [isLargeScreen, setIsLargeScreen] = useState(false);
-    useEffect(() => {
-        const handleResize = () => {
-            setIsLargeScreen(window.innerWidth >= 768);
-        };
-        handleResize();
+  const isLargeScreen = useMediaQuery("(min-width: 768px)");
 
-        window.addEventListener('resize', handleResize);
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }, []);
-
-    return (
-        <div className="w-screen m-auto p-4" id='skills'>
-            <div className="items-center justify-center w-fit h-fit m-auto p-7 glass bg-base-300/80 rounded-box">
-                {isLargeScreen ?
-                    <div className="relative bg-transparent flex items-center justify-center">
-                        <SkillSet skills={skills} />
-                    </div>
-                    :
-                    <div>
-                        <button className='btn ml-9 w-fit glass opacity-90 text-2xl mt-2 bg-base-300/50 dark:bg-transparent dark:hover:bg-black z-30 dark:hover:text-white dark:border-black border-solid'>
-                            My Tech Stack
-                        </button>
-                        <div className="relative bg-transparent grid gap-2 w-auto grid-cols-2 m-2 items-center justify-center">
-                            {
-                                skills.map(skill => <CircularBar data={skill} key={skill.name} />)
-                            }
-                        </div>
-                    </div>
-                }
+  return (
+    <section id="skills" className="m-auto w-screen p-4">
+      <div className="glass m-auto h-fit w-fit items-center justify-center rounded-box bg-base-300/80 p-7">
+        {isLargeScreen ? (
+          <div className="relative flex items-center justify-center bg-transparent">
+            <SkillSet skills={skills} />
+          </div>
+        ) : (
+          <div>
+            <h2 className="btn glass z-30 ml-9 mt-2 w-fit border-solid bg-base-300/50 text-2xl opacity-90">
+              My Tech Stack
+            </h2>
+            <div className="relative m-2 grid w-auto grid-cols-2 items-center justify-center gap-2 bg-transparent">
+              {skills.map((skill) => (
+                <CircularBar key={skill.name} data={skill} />
+              ))}
             </div>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+};
 
-            {/* Skills list: Hidden on large screens, visible on small/medium screens */}
-            {/* <div className="transition-all duration-500 ease-in-out w-screenpy-2 h-auto lg:w-0 lg:h-0 overflow-hidden">
-                <div className="grid gap-4">
-                    {skills.map(skill => <Bar data={skill} key={skill.name} />)}
-                </div>
-            </div> */}
-        </div >
-    )
-}
-
-export default MySkills
+export default MySkills;
