@@ -158,7 +158,7 @@ const SkillSet = ({ skills }: { skills: ISkills[] }) => {
     >
       <BackgroundVideo src="/videos/game-bg-10.mp4" />
 
-      <h2 className="btn glass z-30 mt-2 border-solid bg-base-300/80 text-3xl opacity-90">
+      <h2 className="btn glass z-30 cursor-default mt-2 border-solid bg-base-300/80 text-3xl opacity-90">
         My Tech Stack
       </h2>
 

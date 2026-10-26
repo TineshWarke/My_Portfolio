@@ -16,7 +16,7 @@ const MySkills = () => {
           </div>
         ) : (
           <div>
-            <h2 className="btn glass z-30 ml-9 mt-2 w-fit border-solid bg-base-300/50 text-2xl opacity-90">
+            <h2 className="btn glass z-30 cursor-default ml-9 mt-2 w-fit border-solid bg-base-300/50 text-2xl opacity-90">
               My Tech Stack
             </h2>
             <div className="relative m-2 grid w-auto grid-cols-2 items-center justify-center gap-2 bg-transparent">

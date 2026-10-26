@@ -46,7 +46,7 @@ const Projects = () => {
         whileTap={{ scale: 0.8 }}
         className="mx-auto mt-7 h-fit w-fit"
       >
-        <h2 className="btn glass border-solid bg-base-300/50 text-xl">
+        <h2 className="btn glass cursor-default border-solid bg-base-300/50 text-xl">
           Projects
         </h2>
       </motion.div>

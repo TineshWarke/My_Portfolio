@@ -10,7 +10,7 @@ const SurfaceCard = ({
   alt: string;
   children: ReactNode;
 }) => (
-  <div className="glass m-2 cursor-pointer flex h-auto min-h-32 items-center space-x-4 rounded-box bg-base-300/50 p-3 transition-[transform,box-shadow] duration-200 hover:-translate-y-2 hover:shadow-[0px_0px_20px_1px_rgba(255,187,118,0.50)] hover:ring-2 hover:ring-white">
+  <div className="glass m-2 flex h-auto min-h-32 items-center space-x-4 rounded-box bg-base-300/50 p-3 transition-[transform,box-shadow] duration-200 hover:-translate-y-2 hover:shadow-[0px_0px_20px_1px_rgba(255,187,118,0.50)] hover:ring-2 hover:ring-white">
     <div className="flex-shrink-0">
       <Image
         height={60}

@@ -17,7 +17,7 @@ const ProjectCard = ({
 }: {
   project: IProject;
 }) => (
-  <article className="card glass relative m-auto h-[500px] cursor-pointer overflow-hidden bg-gradient-to-b from-white/40 to-base-300/80 to-80% shadow-xl">
+  <article className="card glass relative m-auto h-[500px] overflow-hidden bg-gradient-to-b from-white/40 to-base-300/80 to-80% shadow-xl">
     <figure className="px-10 pt-10">
       <Image
         src={image_path}
@@ -43,7 +43,10 @@ const ProjectCard = ({
 
         <div className="flex flex-wrap justify-center gap-2">
           {key_techs.map((tech) => (
-            <button key={tech} className="btn glass m-1 border-solid">
+            <button
+              key={tech}
+              className="btn glass m-1 cursor-default border-solid"
+            >
               {tech}
             </button>
           ))}

@@ -17,7 +17,7 @@ const type = (typewriter: TypewriterClass) => {
 
 const About = () => (
   <section className="p-5 pb-0">
-    <div className="glass m-auto flex max-w-full flex-col overflow-hidden z-0 cursor-pointer rounded-box p-4 opacity-90 sm:max-w-[600px] sm:p-5 md:max-w-[800px] md:p-7 lg:max-w-[1000px]">
+    <div className="glass m-auto flex max-w-full flex-col overflow-hidden z-0 rounded-box p-4 opacity-90 sm:max-w-[600px] sm:p-5 md:max-w-[800px] md:p-7 lg:max-w-[1000px]">
       <div className="relative h-[340px] flex-grow overflow-hidden rounded-box sm:h-[500px] lg:h-[560px]">
         <BackgroundVideo src="/videos/game-bg-1.mp4" />
         <div className="relative h-full overflow-y-scroll scrollbar-none">

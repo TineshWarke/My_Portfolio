@@ -16,7 +16,7 @@ const CircularBar = ({ data: { name, level, icon } }: { data: ISkills }) => {
   return (
     <div
       ref={ref}
-      className="group relative flex h-32 w-32 cursor-pointer items-center justify-center transition-transform duration-300 hover:scale-110"
+      className="group relative flex h-32 w-32 items-center justify-center transition-transform duration-300 hover:scale-110"
     >
       <svg
         aria-hidden="true"

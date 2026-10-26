@@ -82,7 +82,7 @@ const FloatingCard = memo(
       <motion.div
         aria-hidden="true"
         style={{ y, rotate }}
-        className={`glass absolute hidden w-[90%] max-w-[360px] cursor-pointer rounded-box p-5 will-change-transform md:block md:opacity-50 lg:opacity-75 xl:opacity-100 ${box}`}
+        className={`glass absolute hidden w-[90%] max-w-[360px] rounded-box p-5 will-change-transform md:block md:opacity-50 lg:opacity-75 xl:opacity-100 ${box}`}
       >
         <div className="relative h-full w-full overflow-hidden rounded-box">
           <BackgroundVideo src={video} className={focus} />
